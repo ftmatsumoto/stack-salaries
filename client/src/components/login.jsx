@@ -5,3 +5,5 @@ var Login = () => {
     </div>
   );
 }
+
+window.Login = Login;

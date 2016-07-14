@@ -7,3 +7,5 @@ var Search = () => {
     </div>
   );
 }
+
+window.Search = Search;

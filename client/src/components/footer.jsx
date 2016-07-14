@@ -6,3 +6,5 @@ var Footer = () => {
     </div>
   );
 }
+
+window.Footer = footer;

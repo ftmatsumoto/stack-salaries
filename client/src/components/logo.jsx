@@ -6,3 +6,5 @@ var Logo = () => {
     </div>
   );
 }
+
+window.Logo = Logo;

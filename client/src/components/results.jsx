@@ -8,3 +8,5 @@ var Results = () => {
     </div>
   );
 }
+
+window.Results = Results;

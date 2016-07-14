@@ -6,3 +6,5 @@ var Main = () => {
     </div>
   );
 }
+
+window.Main = Main;
