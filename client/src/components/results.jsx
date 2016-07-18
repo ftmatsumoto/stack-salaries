@@ -65,6 +65,8 @@ var Rect = React.createClass({
     },
 });
 
+var salaryRange = ['Lowest', 'Average', 'Highest'];
+
 var Bar = React.createClass({
   getDefaultProps: function() {
     return {
@@ -103,12 +105,18 @@ var Bar = React.createClass({
               x={x}
               y={y+ 50}
               />
-        <text y={y + 35} x={x + 77}
+        <text y={y + 37} x={x + 77}
         textAnchor='middle'
         fontFamily='Helvetica Neue'
         fontSize="30"
         fill="white"
         >{'$' + point}</text>
+        <text y={580} x={x + 77}
+        textAnchor='middle'
+        fontFamily='Helvetica Neue'
+        fontSize="30"
+        fill="white"
+        >{salaryRange[i]}</text>
         </g>
       )
     });
@@ -123,7 +131,7 @@ var Chart = React.createClass({
     render: function() {
         return (
             <svg width={this.props.width}
-                 height={this.props.height + 60} >
+                 height={this.props.height + 95} >
               {this.props.children}
             </svg>
         );

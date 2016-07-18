@@ -25618,6 +25618,8 @@
 	  }
 	});
 
+	var salaryRange = ['Lowest', 'Average', 'Highest'];
+
 	var Bar = _react2.default.createClass({
 	  displayName: 'Bar',
 
@@ -25657,13 +25659,23 @@
 	        }),
 	        _react2.default.createElement(
 	          'text',
-	          { y: y + 35, x: x + 77,
+	          { y: y + 37, x: x + 77,
 	            textAnchor: 'middle',
 	            fontFamily: 'Helvetica Neue',
 	            fontSize: '30',
 	            fill: 'white'
 	          },
 	          '$' + point
+	        ),
+	        _react2.default.createElement(
+	          'text',
+	          { y: 580, x: x + 77,
+	            textAnchor: 'middle',
+	            fontFamily: 'Helvetica Neue',
+	            fontSize: '30',
+	            fill: 'white'
+	          },
+	          salaryRange[i]
 	        )
 	      );
 	    });
@@ -25683,7 +25695,7 @@
 	    return _react2.default.createElement(
 	      'svg',
 	      { width: this.props.width,
-	        height: this.props.height + 60 },
+	        height: this.props.height + 95 },
 	      this.props.children
 	    );
 	  }
