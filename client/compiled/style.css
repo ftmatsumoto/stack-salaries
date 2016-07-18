@@ -43,6 +43,12 @@ body {
   margin-bottom: 20px;
 }
 
+#chartarea {
+  height: 400px;
+  width: 600px;
+  border: 1px solid black;
+}
+
 .navbar {
   display: flex;
   border: none;
@@ -122,6 +128,10 @@ body {
 
 .art img {
   max-width: 90%;
+}
+
+.bar {
+  fill: white;
 }
 
 .bottom {

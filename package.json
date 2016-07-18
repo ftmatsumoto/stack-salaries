@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "convert": "webpack",
-    "dev": "open 'http://localhost:8080/webpack-dev-server/#/'; webpack-dev-server --content-base ./client/compiled/",
+    "start": "npm run convert && open 'http://localhost:8080/webpack-dev-server/#/'; webpack-dev-server --content-base ./client/compiled/",
     "live": "nodemon ./server/server.js",
-    "start": "npm run convert && npm run live"
+    "dev": "npm run convert && npm run live"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +30,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "cors": "^2.7.1",
+    "d3": "^3.5.17",
     "express": "^4.14.0",
     "express-passport-logout": "^0.1.0",
     "history": "^1.17.0",
@@ -44,6 +45,7 @@
     "passport-jwt": "^2.1.0",
     "passport-local": "^1.0.0",
     "react": "^0.14.3",
+    "react-d3-components": "^0.6.4",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.1",

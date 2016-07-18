@@ -127,7 +127,7 @@ app.post('/signup', function(req, res, next){
   var email = req.body.email;
   var password = req.body.password;
 
-  Validation to check if all the fields were being passed
+  // Validation to check if all the fields were being passed
   if(!email || !password || !name){
     return res.send(422, {error: "Please fill out all the fields"});
   }
