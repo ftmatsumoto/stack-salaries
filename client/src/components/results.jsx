@@ -97,11 +97,19 @@ var Bar = React.createClass({
           x = xScale(i);
 
       return (
+        <g key={i} >
         <Rect height={height}
               width={width}
               x={x}
-              y={y}
-              key={i} />
+              y={y+ 50}
+              />
+        <text y={y + 35} x={x + 77}
+        textAnchor='middle'
+        fontFamily='Helvetica Neue'
+        fontSize="30"
+        fill="white"
+        >{'$' + point}</text>
+        </g>
       )
     });
 
@@ -115,7 +123,7 @@ var Chart = React.createClass({
     render: function() {
         return (
             <svg width={this.props.width}
-                 height={this.props.height} >
+                 height={this.props.height + 60} >
               {this.props.children}
             </svg>
         );
@@ -128,12 +136,16 @@ var Axis = React.createClass({
   }
 });
 
-var all = [
+var fakeData = [
   {x: 'a', y: 65000},
   {x: 'b', y: 106000},
   {x: 'c', y: 180000}
 ];
 
+var fakeInfo = {
+  stack: 'React',
+  location: 'New York, NY'
+}
 
 var Results = React.createClass({
     getDefaultProps: function() {
@@ -145,19 +157,16 @@ var Results = React.createClass({
 
     getInitialState: function() {
         return {
-          data: all
+          data: fakeData,
+          info: fakeInfo
         }
-    },
-
-    showAll: function() {
-      this.setState({data : all})
     },
 
     render: function() {
         return (
           <div>
             <div className="selection">
-              <h3>Salary stats for React in Blahstown, BH</h3>
+              <h3>Salary Stats for {this.state.info.stack} in {this.state.info.location}</h3>
             </div>
             <hr/>
             <Chart width={this.props.width}
@@ -172,28 +181,3 @@ var Results = React.createClass({
 });
 
 export default Results;
-
-// import React from 'react';
-// import ReactD3 from 'react-d3-components';
-
-// var SalaryChart = ReactD3.BarChart;
-
-// var data = [{
-//     values: [{x: 'Lowest', y: 65}, {x: 'Average', y: 106}, {x: 'Highest', y: 185}]
-// }];
-
-// const Results = React.createClass({
-//   render: function() {
-//     return (
-//       <div>
-//         <SalaryChart
-//         data={data}
-//         width={600}
-//         height={400}
-//         margin={{top: 10, bottom: 50, left: 50, right: 10}}/>
-//       </div>
-//     );
-//   }
-// });
-
-// export default Results;

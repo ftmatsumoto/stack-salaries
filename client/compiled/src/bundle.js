@@ -25647,11 +25647,25 @@
 	          width = xScale.rangeBand(),
 	          x = xScale(i);
 
-	      return _react2.default.createElement(Rect, { height: height,
-	        width: width,
-	        x: x,
-	        y: y,
-	        key: i });
+	      return _react2.default.createElement(
+	        'g',
+	        { key: i },
+	        _react2.default.createElement(Rect, { height: height,
+	          width: width,
+	          x: x,
+	          y: y + 50
+	        }),
+	        _react2.default.createElement(
+	          'text',
+	          { y: y + 35, x: x + 77,
+	            textAnchor: 'middle',
+	            fontFamily: 'Helvetica Neue',
+	            fontSize: '30',
+	            fill: 'white'
+	          },
+	          '$' + point
+	        )
+	      );
 	    });
 
 	    return _react2.default.createElement(
@@ -25669,7 +25683,7 @@
 	    return _react2.default.createElement(
 	      'svg',
 	      { width: this.props.width,
-	        height: this.props.height },
+	        height: this.props.height + 60 },
 	      this.props.children
 	    );
 	  }
@@ -25683,7 +25697,12 @@
 	  }
 	});
 
-	var all = [{ x: 'a', y: 65000 }, { x: 'b', y: 106000 }, { x: 'c', y: 180000 }];
+	var fakeData = [{ x: 'a', y: 65000 }, { x: 'b', y: 106000 }, { x: 'c', y: 180000 }];
+
+	var fakeInfo = {
+	  stack: 'React',
+	  location: 'New York, NY'
+	};
 
 	var Results = _react2.default.createClass({
 	  displayName: 'Results',
@@ -25697,12 +25716,9 @@
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      data: all
+	      data: fakeData,
+	      info: fakeInfo
 	    };
-	  },
-
-	  showAll: function showAll() {
-	    this.setState({ data: all });
 	  },
 
 	  render: function render() {
@@ -25715,7 +25731,10 @@
 	        _react2.default.createElement(
 	          'h3',
 	          null,
-	          'Salary stats for React in Blahstown, BH'
+	          'Salary Stats for ',
+	          this.state.info.stack,
+	          ' in ',
+	          this.state.info.location
 	        )
 	      ),
 	      _react2.default.createElement('hr', null),
@@ -25732,31 +25751,6 @@
 	});
 
 	exports.default = Results;
-
-	// import React from 'react';
-	// import ReactD3 from 'react-d3-components';
-
-	// var SalaryChart = ReactD3.BarChart;
-
-	// var data = [{
-	//     values: [{x: 'Lowest', y: 65}, {x: 'Average', y: 106}, {x: 'Highest', y: 185}]
-	// }];
-
-	// const Results = React.createClass({
-	//   render: function() {
-	//     return (
-	//       <div>
-	//         <SalaryChart
-	//         data={data}
-	//         width={600}
-	//         height={400}
-	//         margin={{top: 10, bottom: 50, left: 50, right: 10}}/>
-	//       </div>
-	//     );
-	//   }
-	// });
-
-	// export default Results;
 
 /***/ },
 /* 228 */
