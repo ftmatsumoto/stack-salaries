@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Import all actions & helper methods
-import { setSearch } from '../actions/actionCreator';
+import { setSearch, setCityState } from '../actions/actionCreator';
 import { loggedIn } from '../auth/auth';
 
 // Import all needed components
@@ -24,8 +24,7 @@ class AdvancedSearch extends React.Component{
       education: "",
       gender: "",
       experience: "",
-      salary: {},
-      loggedIn: loggedIn()
+      salary: {}
     };
 
     // Assign bindings to avoid cluttering the render method
@@ -102,6 +101,11 @@ class AdvancedSearch extends React.Component{
         self.setState({
           salary: results
         });
+        self.props.setCityState({
+          stack: self.state.stack,
+          cityForJob: self.state.city,
+          stateForJob: self.state.state
+        });
         self.redirectToResults(results);
       },
       error: function(err) {
@@ -116,7 +120,6 @@ class AdvancedSearch extends React.Component{
     return (
     <div id="dashboard" className="container results">
       <nav id="resultNav" className="navbar navbar-default navbar-fixed-top">
-        <Logo loggedIn={this.state.loggedIn} />
       </nav>
 
       <div className="row dashboard-row center-block">
@@ -150,7 +153,7 @@ AdvancedSearch.contextTypes= {
   }
 
   function mapDispatchToProps(dispatch) {
-    return bindActionCreators({setSearch: setSearch}, dispatch);
+    return bindActionCreators({setSearch: setSearch, setCityState: setCityState }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdvancedSearch);
