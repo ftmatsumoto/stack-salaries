@@ -25,20 +25,35 @@ class Jobs extends React.Component {
   componentWillMount(){
     this.getJobs();
   }
+  componentWillReceiveProps(nextProps){
+    if(this.props.cityState !== nextProps.cityState){
+      var query = {
+        publisher: "5453642953934453",
+        format:"json",
+        q: JSON.stringify(nextProps.cityState.stack),
+        l: `${nextProps.cityState.cityForJob},
+        ${nextProps.cityState.stateForJob}`,
+        v: 2
+      };
+      this.getJobs(query);
+    }
+  }
 
-  getJobs(){
+  getJobs(query){
 
   var self = this;
 
-  // Our query parameters
-  var query = {
-    publisher: "5453642953934453",
-    format:"json",
-    q: JSON.stringify(this.props.cityState.stack),
-    l: `${this.props.cityState.cityForJob},
-    ${this.props.cityState.stateForJob}`,
-    v: 2
-  };
+  //Our query parameters
+  if(!query){
+    var query = {
+      publisher: "5453642953934453",
+      format:"json",
+      q: JSON.stringify(this.props.cityState.stack),
+      l: `${this.props.cityState.cityForJob},
+      ${this.props.cityState.stateForJob}`,
+      v: 2
+    };
+  }
 
     $.ajax({
       data: query,

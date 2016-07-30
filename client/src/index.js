@@ -23,13 +23,13 @@ ReactDOM.render(( <Provider store={createStore(reducers)}>
 // An initialize function for Google Places Auto Complete Feature
 // It restricts searches to the US
 // This portion can be refactored into another file if needed
-function initialize() {
-  var options = {
-    types: ['(cities)'],
-    componentRestrictions: {country: "us"}
-  };
-  var input = document.getElementById('searchTextField');
-  var autocomplete = new google.maps.places.Autocomplete(input, options);
-};
+// function initialize() {
+//   var options = {
+//     types: ['(cities)'],
+//     componentRestrictions: {country: "us"}
+//   };
+//   var input = document.getElementById('searchTextField');
+//   var autocomplete = new google.maps.places.Autocomplete(input, options);
+// };
 
-google.maps.event.addDomListener(window, 'load', initialize);
+// google.maps.event.addDomListener(window, 'load', initialize);

@@ -21,9 +21,22 @@ class Search extends React.Component{
       salary: {},
     };
 
-      this.getDatafromServer = this.getDatafromServer.bind(this);
-      this.findStack = this.findStack.bind(this);
-      this.findCityState = this.findCityState.bind(this);
+    this.getDatafromServer = this.getDatafromServer.bind(this);
+    this.findStack = this.findStack.bind(this);
+    this.findCityState = this.findCityState.bind(this);
+  }
+
+  googleAPI() {
+    var options = {
+      types: ['(cities)'],
+      componentRestrictions: {country: "us"}
+    };
+    var input = document.getElementById('searchTextField');
+    var searchBox = new google.maps.places.SearchBox(input,options);
+  }
+
+  componentDidMount(){
+    this.googleAPI();
   }
 
   findCityState(e) {
@@ -38,7 +51,7 @@ class Search extends React.Component{
     });
   }
 
-  redirectToResults(search){
+  redirectToResults(){
     this.props.setSearch(this.state.salary);
     this.context.router.push('/results');
   }
@@ -63,6 +76,7 @@ class Search extends React.Component{
       contentType:"application/json",
       data: JSON.stringify(data),
       success: function(results) {
+        console.log('here is the new results',results);
         self.setState({
           salary: results
         });
@@ -71,7 +85,7 @@ class Search extends React.Component{
           cityForJob: cityState[0],
           stateForJob: cityState[1]
         });
-        self.redirectToResults(results);
+        self.redirectToResults();
       },
       error: function(err) {
         console.log(err);
@@ -84,7 +98,6 @@ class Search extends React.Component{
     return (
       <div className="search-wrapper">
         <SearchInput
-          history = {this.props.history}
           getDatafromServer = {this.getDatafromServer}
           findStack = {this.findStack}
           findCityState= {this.findCityState}
