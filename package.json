@@ -8,7 +8,7 @@
     "npm": "3.8.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha spec/server/modelSpec.js",
     "convert": "webpack",
     "compile-routes": "babel ./client/src/router.js --out-file ./client/src/router-c.js --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
     "compile-server": "babel ./server/server.js --out-file ./server/server-c.js --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
