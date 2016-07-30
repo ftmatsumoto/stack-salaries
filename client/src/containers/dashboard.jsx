@@ -158,6 +158,10 @@ class Dashboard extends React.Component {
         </div>
       </div>
 
+      <div>
+
+      </div>
+
       <div className="row dashboard-row center-block">
          <div className="loginMain">
           <DataInput
