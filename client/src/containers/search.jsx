@@ -27,12 +27,8 @@ class Search extends React.Component{
   }
 
   googleAPI() {
-    var options = {
-      types: ['(cities)'],
-      componentRestrictions: {country: "us"}
-    };
     var input = document.getElementById('searchTextField');
-    var searchBox = new google.maps.places.SearchBox(input,options);
+    var searchBox = new google.maps.places.SearchBox(input);
   }
 
   componentDidMount(){
