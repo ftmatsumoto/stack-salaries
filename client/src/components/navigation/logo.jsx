@@ -13,14 +13,14 @@ var Logo = (props) => {
         <div className="right">
           {props.loggedIn ? (
               <div>
-                <button className="btn btn-primary login"><Link to='/dashboard'>Dashboard</Link></button>
-                <button className="btn btn-primary login"><Link to='/advancedsearch'>Advanced Search</Link></button>
-                <button className="btn btn-primary login"><Link to='/logout'>Log Out</Link></button>
+                <Link to='/dashboard'><button className="btn btn-primary login">Dashboard</button></Link>
+                <Link to='/advancedsearch'><button className="btn btn-primary login">Advanced Search</button></Link>
+                <Link to='/logout'><button className="btn btn-primary login">Log Out</button></Link>
               </div>
             ) : (
               <div>
-                <button className="btn btn-primary login"><Link to='/login'>Login</Link></button>
-                <button className="btn btn-primary login"><Link to='/signup'>Sign Up</Link></button>
+                <Link to='/login'><button className="btn btn-primary login">Login</button></Link>
+                <Link to='/signup'><button className="btn btn-primary login">Sign Up</button></Link>
               </div>
           )}
         </div>
@@ -30,5 +30,3 @@ var Logo = (props) => {
 }
 
 export default Logo;
-
-
