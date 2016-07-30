@@ -6,17 +6,17 @@
 
 // Return a true/false whether localStorage token exists
 export function loggedIn(){
-  return !!$window.sessionStorage.token;
+  return !!window.sessionStorage.token;
 }
 
 // Deletes the localStorage token
 // New tokens are sent every time a user logs in
 export function logOut(){
-  delete $window.sessionStorage.token;
+  delete window.sessionStorage.token;
 }
 
 // Retrieves a given token from localStorage
 export function retrieveToken(){
-  return $window.sessionStorage.token;
+  return window.sessionStorage.token;
 }
 
