@@ -38,6 +38,7 @@ class Dashboard extends React.Component {
     this.addEducation = this.addEducation.bind(this);
     this.addExperience = this.addExperience.bind(this);
     this.addPosition = this.addPosition.bind(this);
+    this.addSalary = this.addSalary.bind(this);
   }
 
   addCity(e) {
@@ -76,6 +77,11 @@ class Dashboard extends React.Component {
     });
   }
 
+  addSalary(e) {
+    this.setState({
+      salary:e.target.value
+    });
+  }
 
   submitToStore() {
     var data = {
@@ -84,7 +90,8 @@ class Dashboard extends React.Component {
       state:this.state.state,
       education:this.state.education,
       experience:this.state.experience,
-      position:this.state.position
+      position:this.state.position,
+      salary:this.state.salary
     };
 
     this.props.setUserInfo(data);
@@ -101,7 +108,8 @@ class Dashboard extends React.Component {
       state:this.state.state,
       education:this.state.education,
       experience:this.state.experience,
-      position:this.state.position
+      position:this.state.position,
+      salary: this.state.salary
     };
 
     $.ajax({
@@ -160,6 +168,7 @@ class Dashboard extends React.Component {
             addEducation = {this.addEducation}
             addExperience = {this.addExperience}
             addPosition = {this.addPosition}
+            addSalary = {this.addSalary}
           />
         </div>
       </div>
