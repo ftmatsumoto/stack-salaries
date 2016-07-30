@@ -1,34 +1,9 @@
 var SD = require('../models/stackdata');
 
-//takes the object that's sent to the server
-// and modifies it into a query for mongoose.
-var getQuery = function(query, callback){
-  var clear = {}
-  for(var k in query){
-    if(k === 'stack' && query[k].length > 0){
-      clear['stack'] = {$all: query[k]};
-    } else if (query[k] && query[k].length > 0){
-      clear[k] = query[k];
-    }
-  }
-  console.log(clear);
-  callback(clear);
-}
-
-//uses the query from getQuery to perform a search in mongoose
-// to get a list of salaries back.
-var getSalary = function(query, callback){
-  getQuery(query, function(results){
-    SD.find(results, {salary: 1, _id : 0}).exec(function(err, results){
-      if(err) return handleError(err);
-      callback(results);
-    })
-  });
-};
-
 //takes the object that's sent to the server and
 // converts it to be made into a salary entry.
 exports.createSalary = function(data, callback){
+  console.log('salary created - ', data);
   for(var k in data){
     if(typeof(data[k]) === 'string'){
       data[k] = data[k].toLowerCase();
@@ -46,10 +21,37 @@ exports.createSalary = function(data, callback){
   })
 };
 
+//takes the object that's sent to the server
+// and modifies it into a query for mongoose.
+var getQuery = function(query, callback){
+  var clear = {}
+  for(var k in query){
+    if(k === 'stack' && query[k].length > 0){
+      clear['stack'] = {$all: query[k]};
+    } else if (query[k] && query[k].length > 0){
+      clear[k] = query[k];
+    }
+  }
+  // console.log(clear);
+  callback(clear);
+}
+
+//uses the query from getQuery to perform a search in mongoose
+// to get a list of salaries back.
+var getSalary = function(query, callback){
+  getQuery(query, function(results){
+    SD.find(results, {salary: 1, _id : 0}).exec(function(err, results){
+      if(err) return handleError(err);
+      callback(results);
+    })
+  });
+};
+
 //Calculates the lowest salary, average salary, and highest salary
 // from the results of getSalary
 var calculateSalary = function(query, callback){
   getSalary(query, function(results){
+    console.log(query, results);
     var salaries = [];
     var calcSalary = {};
     if(results.length > 0){
