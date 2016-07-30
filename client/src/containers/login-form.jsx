@@ -78,7 +78,7 @@ class LoginForm extends React.Component {
       contentType:"application/json",
       data: JSON.stringify(data),
       success: function(data) {
-        localStorage.setItem('token', data.token),
+        $window.sessionStorage.setItem('token', data.token),
         self.setState({
           authToken: data.token,
         });
