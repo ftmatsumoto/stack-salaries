@@ -25412,20 +25412,20 @@ module.exports =
 	      'div',
 	      null,
 	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-primary login' },
+	        _reactRouter.Link,
+	        { to: '/dashboard' },
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/dashboard' },
+	          'button',
+	          { className: 'btn btn-primary login' },
 	          'Dashboard'
 	        )
 	      ),
 	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-primary login' },
+	        _reactRouter.Link,
+	        { to: '/logout' },
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/logout' },
+	          'button',
+	          { className: 'btn btn-primary login' },
 	          'Log Out'
 	        )
 	      )
@@ -25433,20 +25433,20 @@ module.exports =
 	      'div',
 	      null,
 	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-primary login' },
+	        _reactRouter.Link,
+	        { to: '/login' },
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/login' },
+	          'button',
+	          { className: 'btn btn-primary login' },
 	          'Login'
 	        )
 	      ),
 	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-primary login' },
+	        _reactRouter.Link,
+	        { to: '/signup' },
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/signup' },
+	          'button',
+	          { className: 'btn btn-primary login' },
 	          'Sign Up'
 	        )
 	      )
@@ -25501,29 +25501,29 @@ module.exports =
 	          'div',
 	          null,
 	          _react2.default.createElement(
-	            'button',
-	            { className: 'btn btn-primary login' },
+	            _reactRouter.Link,
+	            { to: '/dashboard' },
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/dashboard' },
+	              'button',
+	              { className: 'btn btn-primary login' },
 	              'Dashboard'
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'button',
-	            { className: 'btn btn-primary login' },
+	            _reactRouter.Link,
+	            { to: '/advancedsearch' },
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/advancedsearch' },
+	              'button',
+	              { className: 'btn btn-primary login' },
 	              'Advanced Search'
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'button',
-	            { className: 'btn btn-primary login' },
+	            _reactRouter.Link,
+	            { to: '/logout' },
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/logout' },
+	              'button',
+	              { className: 'btn btn-primary login' },
 	              'Log Out'
 	            )
 	          )
@@ -25531,20 +25531,20 @@ module.exports =
 	          'div',
 	          null,
 	          _react2.default.createElement(
-	            'button',
-	            { className: 'btn btn-primary login' },
+	            _reactRouter.Link,
+	            { to: '/login' },
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/login' },
+	              'button',
+	              { className: 'btn btn-primary login' },
 	              'Login'
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'button',
-	            { className: 'btn btn-primary login' },
+	            _reactRouter.Link,
+	            { to: '/signup' },
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/signup' },
+	              'button',
+	              { className: 'btn btn-primary login' },
 	              'Sign Up'
 	            )
 	          )
@@ -37457,12 +37457,8 @@ module.exports =
 	  _createClass(Search, [{
 	    key: 'googleAPI',
 	    value: function googleAPI() {
-	      var options = {
-	        types: ['(cities)'],
-	        componentRestrictions: { country: "us" }
-	      };
 	      var input = document.getElementById('searchTextField');
-	      var searchBox = new google.maps.places.SearchBox(input, options);
+	      var searchBox = new google.maps.places.SearchBox(input);
 	    }
 	  }, {
 	    key: 'componentDidMount',
