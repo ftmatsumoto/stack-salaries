@@ -8,6 +8,7 @@
     "npm": "3.8.6"
   },
   "scripts": {
+    "postinstall": "npm run compile-server && npm run compile-routes && npm run convert",
     "test": "echo \"Error: no test specified\" && exit 1",
     "convert": "webpack",
     "compile-routes": "babel ./client/src/router.js --out-file ./client/src/router-c.js --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
