@@ -93,7 +93,7 @@ class AdvancedSearch extends React.Component{
     };
 
     $.ajax({
-      url:"http://localhost:3000/search",
+      url:"/search",
       type:"POST",
       contentType:"application/json",
       data: JSON.stringify(data),

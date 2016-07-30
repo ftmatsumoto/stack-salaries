@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, '../client/compiled')));
 
 
 // Mongoose Connection (Refactor into Separate File)
-var databaseURL = process.env.MONGOLABS ||'mongodb://localhost:27017/stack-salaries'
+var databaseURL = process.env.MONGODB_URI ||'mongodb://localhost:27017/stack-salaries'
 
 mongoose.connect(databaseURL);
 
