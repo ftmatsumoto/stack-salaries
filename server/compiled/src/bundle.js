@@ -37505,7 +37505,7 @@ module.exports =
 	      };
 
 	      _jquery2.default.ajax({
-	        url: "http://localhost:3000/search",
+	        url: "/search",
 	        type: "POST",
 	        contentType: "application/json",
 	        data: JSON.stringify(data),
@@ -47590,7 +47590,7 @@ module.exports =
 	      };
 
 	      _jquery2.default.ajax({
-	        url: "http://localhost:3000/search",
+	        url: "/search",
 	        type: "POST",
 	        contentType: "application/json",
 	        data: JSON.stringify(data),
@@ -48237,7 +48237,7 @@ module.exports =
 	      };
 
 	      _jquery2.default.ajax({
-	        url: "http://localhost:3000/stackentry",
+	        url: "/stackentry",
 	        type: "POST",
 	        contentType: "application/json",
 	        data: JSON.stringify(data),

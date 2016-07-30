@@ -113,7 +113,7 @@ class Dashboard extends React.Component {
     };
 
     $.ajax({
-      url:"http://localhost:3000/stackentry",
+      url:"/stackentry",
       type:"POST",
       contentType:"application/json",
       data: JSON.stringify(data),
