@@ -27,9 +27,9 @@ class Dashboard extends React.Component {
       experience: '',
       stack: [],
       position:'',
-      loggedIn: loggedIn()
+      loggedIn: loggedIn(),
+      userData: []
     };
-
 
     this.inputData = this.inputData.bind(this);
     this.addStack = this.addStack.bind(this);
@@ -116,8 +116,11 @@ class Dashboard extends React.Component {
       url:"/stackentry",
       type:"POST",
       contentType:"application/json",
-      data: JSON.stringify(data),
+      data: JSON.stringify({data: data, token: window.sessionStorage.token}),
       success: function(data) {
+        this.setState({
+          userData: data
+        });
         self.submitToStore();
         self.context.router.push('/');
       },
@@ -126,6 +129,12 @@ class Dashboard extends React.Component {
       }
     });
 
+  }
+
+  componentWillMount(){
+    this.setState({
+  //     userData: data
+    });
   }
 
   render() {
@@ -147,9 +156,9 @@ class Dashboard extends React.Component {
           <h1>Welcome <span className="color">{this.props.userInfo.name}</span> to the Dashboard</h1>
 
          <div>
-              <p className="lead">Name: {this.props.userInfo.name} </p>
-              <p className="lead">Email: {this.props.userInfo.email} </p>
-              <p className="lead">Gender: {this.props.userInfo.gender} </p>
+              <p className="lead">Name: {this.props.userInfo.name}</p>
+              <p className="lead">Email: {this.props.userInfo.email}</p>
+              <p className="lead">Gender: {this.props.userInfo.gender}</p>
           </div>
         </div>
             ) : (
@@ -158,8 +167,14 @@ class Dashboard extends React.Component {
         </div>
       </div>
 
-      <div>
-
+      <div className="row dashboard-row center-block">
+        AAAAAAAAAAAAAAAAAAAAAAAA
+        { console.log(this.state.userData) }
+        {this.state.userData.map((salaryEntry) => {
+          return (
+            <p>{salaryEntry.stack} - {salaryEntry.experience} - {salaryEntry.salary}</p>
+          )
+        })}
       </div>
 
       <div className="row dashboard-row center-block">

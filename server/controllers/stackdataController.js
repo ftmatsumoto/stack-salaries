@@ -1,23 +1,30 @@
 var SD = require('../models/stackdata');
+var Users = require('../models/user');
 
 //takes the object that's sent to the server and
 // converts it to be made into a salary entry.
 exports.createSalary = function(data, callback){
-  console.log('salary created - ', data);
-  for(var k in data){
-    if(typeof(data[k]) === 'string'){
-      data[k] = data[k].toLowerCase();
+  console.log('salary created - ', data.salaryInfo);
+  for(var k in data.salaryInfo){
+    if(typeof(data.salaryInfo[k]) === 'string'){
+      data.salaryInfo[k] = data.salaryInfo[k].toLowerCase();
     }
     if(k === 'stack'){
-      for(var i = 0; i < data[k].length; i++){
-        data[k][i] = data[k][i].toLowerCase();
+      for(var i = 0; i < data.salaryInfo[k].length; i++){
+        data.salaryInfo[k][i] = data.salaryInfo[k][i].toLowerCase();
       }
     }
   }
-  var newSD = new SD (data);
+  var newSD = new SD (data.salaryInfo);
   newSD.save(function(err){
     if(err) return handleError(err);
-    callback(newSD);
+      Users.findOne({'token': data.token}, function(err, user){
+        user.userData.push(data.salaryInfo);
+        user.save(function(err){
+          if (err) console.log(err);
+          callback(user.userData);
+        })
+      });
   })
 };
 

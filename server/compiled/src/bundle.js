@@ -48145,7 +48145,8 @@ module.exports =
 	      experience: '',
 	      stack: [],
 	      position: '',
-	      loggedIn: (0, _auth.loggedIn)()
+	      loggedIn: (0, _auth.loggedIn)(),
+	      userData: []
 	    };
 
 	    _this.inputData = _this.inputData.bind(_this);
@@ -48244,14 +48245,24 @@ module.exports =
 	        url: "/stackentry",
 	        type: "POST",
 	        contentType: "application/json",
-	        data: JSON.stringify(data),
+	        data: JSON.stringify({ data: data, token: window.sessionStorage.token }),
 	        success: function success(data) {
+	          this.setState({
+	            userData: data
+	          });
 	          self.submitToStore();
 	          self.context.router.push('/');
 	        },
 	        error: function error(err) {
 	          console.log(err);
 	        }
+	      });
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.setState({
+	        //     userData: data
 	      });
 	    }
 	  }, {
@@ -48293,26 +48304,40 @@ module.exports =
 	                  'p',
 	                  { className: 'lead' },
 	                  'Name: ',
-	                  this.props.userInfo.name,
-	                  ' '
+	                  this.props.userInfo.name
 	                ),
 	                _react2.default.createElement(
 	                  'p',
 	                  { className: 'lead' },
 	                  'Email: ',
-	                  this.props.userInfo.email,
-	                  ' '
+	                  this.props.userInfo.email
 	                ),
 	                _react2.default.createElement(
 	                  'p',
 	                  { className: 'lead' },
 	                  'Gender: ',
-	                  this.props.userInfo.gender,
-	                  ' '
+	                  this.props.userInfo.gender
 	                )
 	              )
 	            ) : _react2.default.createElement('div', null)
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row dashboard-row center-block' },
+	          'AAAAAAAAAAAAAAAAAAAAAAAA',
+	          console.log(this.state.userData),
+	          this.state.userData.map(function (salaryEntry) {
+	            return _react2.default.createElement(
+	              'p',
+	              null,
+	              salaryEntry.stack,
+	              ' - ',
+	              salaryEntry.experience,
+	              ' - ',
+	              salaryEntry.salary
+	            );
+	          })
 	        ),
 	        _react2.default.createElement(
 	          'div',
