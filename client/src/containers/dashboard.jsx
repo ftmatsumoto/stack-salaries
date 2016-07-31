@@ -116,15 +116,14 @@ class Dashboard extends React.Component {
       url:"/stackentry",
       type:"POST",
       contentType:"application/json",
-      data: JSON.stringify({data: data, token: window.sessionStorage.token}),
-      success: function(data) {
+      data: JSON.stringify({salaryInfo: data, token: window.sessionStorage.token}),
+      success: (data) => {
         this.setState({
           userData: data
         });
         self.submitToStore();
-        self.context.router.push('/');
       },
-      error: function(err) {
+      error: (err) => {
         console.log(err);
       }
     });
@@ -132,8 +131,21 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount(){
-    this.setState({
-  //     userData: data
+    // query to grab userData array from user logged in
+    // change after add token to the database
+    $.ajax({
+      url:"/user?name=aaaaa",
+      type:"GET",
+      contentType:"application/json",
+      success: (data) => {
+        console.log(data);
+        this.setState({
+          userData: data[0].userData
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
     });
   }
 
@@ -168,7 +180,6 @@ class Dashboard extends React.Component {
       </div>
 
       <div className="row dashboard-row center-block">
-        AAAAAAAAAAAAAAAAAAAAAAAA
         { console.log(this.state.userData) }
         {this.state.userData.map((salaryEntry) => {
           return (

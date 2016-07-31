@@ -48227,6 +48227,8 @@ module.exports =
 	  }, {
 	    key: 'inputData',
 	    value: function inputData(e) {
+	      var _this2 = this;
+
 	      e.preventDefault();
 
 	      var self = this;
@@ -48245,13 +48247,12 @@ module.exports =
 	        url: "/stackentry",
 	        type: "POST",
 	        contentType: "application/json",
-	        data: JSON.stringify({ data: data, token: window.sessionStorage.token }),
+	        data: JSON.stringify({ salaryInfo: data, token: window.sessionStorage.token }),
 	        success: function success(data) {
-	          this.setState({
+	          _this2.setState({
 	            userData: data
 	          });
 	          self.submitToStore();
-	          self.context.router.push('/');
 	        },
 	        error: function error(err) {
 	          console.log(err);
@@ -48261,8 +48262,23 @@ module.exports =
 	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.setState({
-	        //     userData: data
+	      var _this3 = this;
+
+	      // query to grab userData array from user logged in
+	      // change after add token to the database
+	      _jquery2.default.ajax({
+	        url: "/user?name=aaaaa",
+	        type: "GET",
+	        contentType: "application/json",
+	        success: function success(data) {
+	          console.log(data);
+	          _this3.setState({
+	            userData: data[0].userData
+	          });
+	        },
+	        error: function error(err) {
+	          console.log(err);
+	        }
 	      });
 	    }
 	  }, {
@@ -48325,7 +48341,6 @@ module.exports =
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'row dashboard-row center-block' },
-	          'AAAAAAAAAAAAAAAAAAAAAAAA',
 	          console.log(this.state.userData),
 	          this.state.userData.map(function (salaryEntry) {
 	            return _react2.default.createElement(

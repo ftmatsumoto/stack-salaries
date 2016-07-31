@@ -65,6 +65,7 @@ app.post('/search', function(req, res, next) {
 
 // Add a Stack Entry
 app.post('/stackentry', function(req, res, next) {
+  console.log(req.body);
   SD.createSalary(req.body, function(result) {
     res.status(201);
     res.json(result);
@@ -79,6 +80,15 @@ app.get('/users', requireAuth, function(req, res, next) {
     } else {
       throw err;
     }
+  });
+});
+
+// GET data from one user
+// finding user by name:"aaaaa", change after add token to database
+app.get('/user', function(req, res, next) {
+  User.find({name: req.query.name}, function(err, user) {
+    if (err) {console.log(err);}
+    res.status(200).send(user);
   });
 });
 

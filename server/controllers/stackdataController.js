@@ -15,16 +15,20 @@ exports.createSalary = function(data, callback){
       }
     }
   }
+
+  // query that finds the user and push the salary
+  // to the userData array
+  // change after the token field is added to the user table
   var newSD = new SD (data.salaryInfo);
   newSD.save(function(err){
     if(err) return handleError(err);
-      Users.findOne({'token': data.token}, function(err, user){
-        user.userData.push(data.salaryInfo);
-        user.save(function(err){
-          if (err) console.log(err);
-          callback(user.userData);
-        })
-      });
+    Users.findOne({'name': "aaaaa"}, function(err, user){
+      user.userData.push(data.salaryInfo);
+      user.save(function(err){
+        if (err) console.log(err);
+        callback(user.userData);
+      })
+    });
   })
 };
 
