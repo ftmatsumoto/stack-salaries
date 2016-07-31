@@ -48435,7 +48435,8 @@
 	      experience: '',
 	      stack: [],
 	      position: '',
-	      loggedIn: (0, _auth.loggedIn)()
+	      loggedIn: (0, _auth.loggedIn)(),
+	      userData: []
 	    };
 
 	    _this.inputData = _this.inputData.bind(_this);
@@ -48516,6 +48517,8 @@
 	  }, {
 	    key: 'inputData',
 	    value: function inputData(e) {
+	      var _this2 = this;
+
 	      e.preventDefault();
 
 	      var self = this;
@@ -48534,10 +48537,34 @@
 	        url: "/stackentry",
 	        type: "POST",
 	        contentType: "application/json",
-	        data: JSON.stringify(data),
+	        data: JSON.stringify({ salaryInfo: data, token: window.sessionStorage.token }),
 	        success: function success(data) {
+	          _this2.setState({
+	            userData: data
+	          });
 	          self.submitToStore();
-	          self.context.router.push('/');
+	        },
+	        error: function error(err) {
+	          console.log(err);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this3 = this;
+
+	      // query to grab userData array from user logged in
+	      // change after add token to the database
+	      _jquery2.default.ajax({
+	        url: "/user?name=aaaaa",
+	        type: "GET",
+	        contentType: "application/json",
+	        success: function success(data) {
+	          console.log(data);
+	          _this3.setState({
+	            userData: data[0].userData
+	          });
 	        },
 	        error: function error(err) {
 	          console.log(err);
@@ -48583,26 +48610,39 @@
 	                  'p',
 	                  { className: 'lead' },
 	                  'Name: ',
-	                  this.props.userInfo.name,
-	                  ' '
+	                  this.props.userInfo.name
 	                ),
 	                _react2.default.createElement(
 	                  'p',
 	                  { className: 'lead' },
 	                  'Email: ',
-	                  this.props.userInfo.email,
-	                  ' '
+	                  this.props.userInfo.email
 	                ),
 	                _react2.default.createElement(
 	                  'p',
 	                  { className: 'lead' },
 	                  'Gender: ',
-	                  this.props.userInfo.gender,
-	                  ' '
+	                  this.props.userInfo.gender
 	                )
 	              )
 	            ) : _react2.default.createElement('div', null)
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row dashboard-row center-block' },
+	          console.log(this.state.userData),
+	          this.state.userData.map(function (salaryEntry) {
+	            return _react2.default.createElement(
+	              'p',
+	              null,
+	              salaryEntry.stack,
+	              ' - ',
+	              salaryEntry.experience,
+	              ' - ',
+	              salaryEntry.salary
+	            );
+	          })
 	        ),
 	        _react2.default.createElement(
 	          'div',

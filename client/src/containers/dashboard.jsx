@@ -27,9 +27,9 @@ class Dashboard extends React.Component {
       experience: '',
       stack: [],
       position:'',
-      loggedIn: loggedIn()
+      loggedIn: loggedIn(),
+      userData: []
     };
-
 
     this.inputData = this.inputData.bind(this);
     this.addStack = this.addStack.bind(this);
@@ -116,16 +116,37 @@ class Dashboard extends React.Component {
       url:"/stackentry",
       type:"POST",
       contentType:"application/json",
-      data: JSON.stringify(data),
-      success: function(data) {
+      data: JSON.stringify({salaryInfo: data, token: window.sessionStorage.token}),
+      success: (data) => {
+        this.setState({
+          userData: data
+        });
         self.submitToStore();
-        self.context.router.push('/');
       },
-      error: function(err) {
+      error: (err) => {
         console.log(err);
       }
     });
 
+  }
+
+  componentWillMount(){
+    // query to grab userData array from user logged in
+    // change after add token to the database
+    $.ajax({
+      url:"/user?name=aaaaa",
+      type:"GET",
+      contentType:"application/json",
+      success: (data) => {
+        console.log(data);
+        this.setState({
+          userData: data[0].userData
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   render() {
@@ -147,15 +168,24 @@ class Dashboard extends React.Component {
           <h1>Welcome <span className="color">{this.props.userInfo.name}</span> to the Dashboard</h1>
 
          <div>
-              <p className="lead">Name: {this.props.userInfo.name} </p>
-              <p className="lead">Email: {this.props.userInfo.email} </p>
-              <p className="lead">Gender: {this.props.userInfo.gender} </p>
+              <p className="lead">Name: {this.props.userInfo.name}</p>
+              <p className="lead">Email: {this.props.userInfo.email}</p>
+              <p className="lead">Gender: {this.props.userInfo.gender}</p>
           </div>
         </div>
             ) : (
               <div></div>
         )}
         </div>
+      </div>
+
+      <div className="row dashboard-row center-block">
+        { console.log(this.state.userData) }
+        {this.state.userData.map((salaryEntry) => {
+          return (
+            <p>{salaryEntry.stack} - {salaryEntry.experience} - {salaryEntry.salary}</p>
+          )
+        })}
       </div>
 
       <div className="row dashboard-row center-block">
