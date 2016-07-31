@@ -47797,7 +47797,8 @@
 	      education: "",
 	      gender: "",
 	      experience: "",
-	      salary: {}
+	      salary: {},
+	      loggedIn: (0, _auth.loggedIn)()
 	    };
 
 	    // Assign bindings to avoid cluttering the render method
@@ -47887,7 +47888,10 @@
 	          self.props.setCityState({
 	            stack: self.state.stack,
 	            cityForJob: self.state.city,
-	            stateForJob: self.state.state
+	            stateForJob: self.state.state,
+	            education: self.state.education,
+	            gender: self.state.gender,
+	            experience: self.state.experience
 	          });
 	          self.redirectToResults(results);
 	        },
@@ -47902,7 +47906,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'dashboard', className: 'container results' },
-	        _react2.default.createElement('nav', { id: 'resultNav', className: 'navbar navbar-default navbar-fixed-top' }),
+	        _react2.default.createElement(
+	          'nav',
+	          { id: 'resultNav', className: 'navbar navbar-default navbar-fixed-top' },
+	          _react2.default.createElement(_logo2.default, { loggedIn: this.state.loggedIn })
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'row dashboard-row center-block' },

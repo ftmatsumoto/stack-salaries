@@ -24,17 +24,18 @@ class AdvancedSearch extends React.Component{
       education: "",
       gender: "",
       experience: "",
-      salary: {}
+      salary: {},
+      loggedIn: loggedIn()
     };
 
     // Assign bindings to avoid cluttering the render method
     this.GetAdvancedSearchData = this.GetAdvancedSearchData.bind(this);
-    this.findStack = this.findStack.bind(this);
-    this.findCity = this.findCity.bind(this);
-    this.findState = this.findState.bind(this);
-    this.findEducation = this.findEducation.bind(this);
-    this.findGender = this.findGender.bind(this);
-    this.findExperience = this.findExperience.bind(this);
+    this.findStack             = this.findStack.bind(this);
+    this.findCity              = this.findCity.bind(this);
+    this.findState             = this.findState.bind(this);
+    this.findEducation         = this.findEducation.bind(this);
+    this.findGender            = this.findGender.bind(this);
+    this.findExperience        = this.findExperience.bind(this);
   }
 
   findCity(e) {
@@ -104,7 +105,10 @@ class AdvancedSearch extends React.Component{
         self.props.setCityState({
           stack: self.state.stack,
           cityForJob: self.state.city,
-          stateForJob: self.state.state
+          stateForJob: self.state.state,
+          education: self.state.education,
+          gender: self.state.gender,
+          experience:self.state.experience
         });
         self.redirectToResults(results);
       },
@@ -120,6 +124,7 @@ class AdvancedSearch extends React.Component{
     return (
     <div id="dashboard" className="container results">
       <nav id="resultNav" className="navbar navbar-default navbar-fixed-top">
+        <Logo loggedIn={this.state.loggedIn} />
       </nav>
 
       <div className="row dashboard-row center-block">
@@ -153,7 +158,7 @@ AdvancedSearch.contextTypes= {
   }
 
   function mapDispatchToProps(dispatch) {
-    return bindActionCreators({setSearch: setSearch, setCityState: setCityState }, dispatch);
+    return bindActionCreators({setSearch: setSearch, setCityState: setCityState}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdvancedSearch);
