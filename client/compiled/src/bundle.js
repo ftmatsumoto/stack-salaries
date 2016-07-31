@@ -47889,9 +47889,9 @@
 	            stack: self.state.stack,
 	            cityForJob: self.state.city,
 	            stateForJob: self.state.state,
-	            education: this.state.education,
+	            education: self.state.education,
 	            gender: self.state.gender,
-	            experience: this.state.experience
+	            experience: self.state.experience
 	          });
 	          self.redirectToResults(results);
 	        },
@@ -47906,7 +47906,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'dashboard', className: 'container results' },
-	        _react2.default.createElement('nav', { id: 'resultNav', className: 'navbar navbar-default navbar-fixed-top' }),
+	        _react2.default.createElement(
+	          'nav',
+	          { id: 'resultNav', className: 'navbar navbar-default navbar-fixed-top' },
+	          _react2.default.createElement(_logo2.default, { loggedIn: this.state.loggedIn })
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'row dashboard-row center-block' },

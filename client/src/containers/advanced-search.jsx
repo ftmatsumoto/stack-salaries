@@ -106,9 +106,9 @@ class AdvancedSearch extends React.Component{
           stack: self.state.stack,
           cityForJob: self.state.city,
           stateForJob: self.state.state,
-          education: this.state.education,
+          education: self.state.education,
           gender: self.state.gender,
-          experience:this.state.experience
+          experience:self.state.experience
         });
         self.redirectToResults(results);
       },
@@ -124,6 +124,7 @@ class AdvancedSearch extends React.Component{
     return (
     <div id="dashboard" className="container results">
       <nav id="resultNav" className="navbar navbar-default navbar-fixed-top">
+        <Logo loggedIn={this.state.loggedIn} />
       </nav>
 
       <div className="row dashboard-row center-block">
@@ -157,7 +158,7 @@ AdvancedSearch.contextTypes= {
   }
 
   function mapDispatchToProps(dispatch) {
-    return bindActionCreators({setSearch: setSearch, setCityState: setCityState }, dispatch);
+    return bindActionCreators({setSearch: setSearch, setCityState: setCityState}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdvancedSearch);
