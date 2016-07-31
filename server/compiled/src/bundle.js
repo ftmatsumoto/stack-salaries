@@ -47507,7 +47507,8 @@ module.exports =
 	      education: "",
 	      gender: "",
 	      experience: "",
-	      salary: {}
+	      salary: {},
+	      loggedIn: (0, _auth.loggedIn)()
 	    };
 
 	    // Assign bindings to avoid cluttering the render method
@@ -47597,7 +47598,10 @@ module.exports =
 	          self.props.setCityState({
 	            stack: self.state.stack,
 	            cityForJob: self.state.city,
-	            stateForJob: self.state.state
+	            stateForJob: self.state.state,
+	            education: this.state.education,
+	            gender: self.state.gender,
+	            experience: this.state.experience
 	          });
 	          self.redirectToResults(results);
 	        },

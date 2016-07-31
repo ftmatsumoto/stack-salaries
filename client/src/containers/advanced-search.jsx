@@ -24,17 +24,18 @@ class AdvancedSearch extends React.Component{
       education: "",
       gender: "",
       experience: "",
-      salary: {}
+      salary: {},
+      loggedIn: loggedIn()
     };
 
     // Assign bindings to avoid cluttering the render method
     this.GetAdvancedSearchData = this.GetAdvancedSearchData.bind(this);
-    this.findStack = this.findStack.bind(this);
-    this.findCity = this.findCity.bind(this);
-    this.findState = this.findState.bind(this);
-    this.findEducation = this.findEducation.bind(this);
-    this.findGender = this.findGender.bind(this);
-    this.findExperience = this.findExperience.bind(this);
+    this.findStack             = this.findStack.bind(this);
+    this.findCity              = this.findCity.bind(this);
+    this.findState             = this.findState.bind(this);
+    this.findEducation         = this.findEducation.bind(this);
+    this.findGender            = this.findGender.bind(this);
+    this.findExperience        = this.findExperience.bind(this);
   }
 
   findCity(e) {
@@ -104,7 +105,10 @@ class AdvancedSearch extends React.Component{
         self.props.setCityState({
           stack: self.state.stack,
           cityForJob: self.state.city,
-          stateForJob: self.state.state
+          stateForJob: self.state.state,
+          education: this.state.education,
+          gender: self.state.gender,
+          experience:this.state.experience
         });
         self.redirectToResults(results);
       },
