@@ -22,7 +22,7 @@ exports.createSalary = function(data, callback){
   var newSD = new SD (data.salaryInfo);
   newSD.save(function(err){
     if(err) return handleError(err);
-    Users.findOne({'name': "aaaaa"}, function(err, user){
+    Users.findOne({token: data.token}, function(err, user){
       user.userData.push(data.salaryInfo);
       user.save(function(err){
         if (err) console.log(err);
