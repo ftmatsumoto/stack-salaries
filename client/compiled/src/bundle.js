@@ -49371,7 +49371,8 @@
 	        education: this.state.education,
 	        experience: this.state.experience,
 	        position: this.state.position,
-	        salary: this.state.salary
+	        salary: this.state.salary,
+	        gender: this.props.userInfo.gender
 	      };
 	      // this.props.setUserInfo(data);
 	    }
@@ -49389,7 +49390,8 @@
 	        education: this.state.education,
 	        experience: this.state.experience,
 	        position: this.state.position,
-	        salary: this.state.salary
+	        salary: this.state.salary,
+	        gender: this.props.userInfo.gender
 	      };
 
 	      _jquery2.default.ajax({
