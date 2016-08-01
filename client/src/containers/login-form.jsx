@@ -59,6 +59,9 @@ class LoginForm extends React.Component {
         success: function(data) {
           this.props.setUserInfo(data.user);
           this.context.router.push('/dashboard');
+        },
+        error: function(err) {
+          console.error(err);
         }
       })
     } else {

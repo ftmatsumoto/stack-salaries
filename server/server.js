@@ -183,8 +183,18 @@ app.post('/loggedIn', function(req, res, next) {
 
 // Log out a user
 // Note, React Router is currently handling this
-app.get('/logout', logout(), function(req, res, next){
-  res.redirect('/login');
+app.post('/logout', logout(), function(req, res, next){
+  User.findOne({token: req.body.token}, function(err, user) {
+    if (user) {
+      user.token = null;
+      user.save(function(err) {
+        if (err) {return next(err)}
+        res.json({deleted: true});
+      })
+    } else {
+      res.json({deleted: false});
+    }
+  })
 });
 
 // Root Path

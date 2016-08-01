@@ -1,3 +1,4 @@
+import $ from 'jquery';
 // This file contains client side authentication helper methods
 // The server sends back JWT tokens when a login/sign up is successful
 // It also sends back the full user object that you can use in your reducers
@@ -12,11 +13,24 @@ export function loggedIn(){
 // Deletes the localStorage token
 // New tokens are sent every time a user logs in
 export function logOut(){
-  delete window.sessionStorage.token;
+  $.ajax({
+    url: "/logout",
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({token: window.sessionStorage.token}),
+    success: function(data) {
+      delete window.sessionStorage.token;
+      if (!data.deleted) {
+        console.error('Failure to find active user');
+      }
+    },
+    error: function(err) {
+      console.error(err);
+    }
+  })
 }
 
 // Retrieves a given token from localStorage
 export function retrieveToken(){
   return window.sessionStorage.token;
 }
-
