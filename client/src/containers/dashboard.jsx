@@ -4,7 +4,7 @@ import $ from 'jquery';
 import { Router, Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import UserAvatar from 'react-useravatar';
 // Import all actions & helper methods
 import { setUserInfo } from '../actions/actionCreator';
 import { loggedIn } from '../auth/auth';
@@ -168,6 +168,9 @@ class Dashboard extends React.Component {
           <h1>Welcome <span className="color">{this.props.userInfo.name}</span> to the Dashboard</h1>
 
          <div>
+              <div className = 'avatar'>
+                <UserAvatar username={this.props.userInfo.name} />
+              </div>
               <p className="lead">Name: {this.props.userInfo.name}</p>
               <p className="lead">Email: {this.props.userInfo.email}</p>
               <p className="lead">Gender: {this.props.userInfo.gender}</p>
