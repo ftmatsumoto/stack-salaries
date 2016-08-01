@@ -37795,6 +37795,8 @@
 	  }, {
 	    key: 'findStack',
 	    value: function findStack(e) {
+	      var newStack = this.props.searchValue + e.target.value;
+	      this.props.setSearchValue(newStack);
 	      this.setState({
 	        stack: e.target.value.toLowerCase().split(', ')
 	      });
