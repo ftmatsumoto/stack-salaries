@@ -80,7 +80,14 @@ app.get('/getstacks', function(req, res, next) {
     users.forEach(function(user) {
       user.userData.forEach(function(salary) {
         var stack = salary.stack;
-        stacks[stack] ? stacks[stack]++ : stacks[stack] = 1;
+        var stackArr = stack.split(', ');
+        if (stackArr.length > 1) {
+          stackArr.forEach(function(stack) {
+            stacks[stack] ? stacks[stack]++ : stacks[stack] = 1;
+          })
+        } else {
+          stacks[stack] ? stacks[stack]++ : stacks[stack] = 1;
+        }
       })
     })
 

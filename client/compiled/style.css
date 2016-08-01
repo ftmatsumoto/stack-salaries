@@ -512,3 +512,7 @@ svg {
   width: 60%;
   text-align: center;
 }
+
+.stackCloud:hover {
+  cursor: pointer;
+}
