@@ -14,6 +14,7 @@ import Footer from '../layout/footer';
 import Jobs from '../../containers/jobs';
 import Search from '../../containers/search';
 import Results from '../../containers/results';
+import Results2 from '../../containers/results2';
 import AdvancedSearch from '../../containers/advanced-search';
 
 class Stats extends React.Component {
@@ -22,32 +23,66 @@ class Stats extends React.Component {
     super();
 
     this.state = {
-      loggedIn: loggedIn()
+      loggedIn: loggedIn(),
+      graph: true
     }
   }
 
+  changeGraph() {
+    console.log(1111111111)
+    this.setState({
+      graph: !this.state.graph
+    });
+  }
+
   render() {
-    return (
-      <div className="container results">
-          <nav id="resultNav" className="navbar navbar-default navbar-fixed-top">
-            <Logo loggedIn={this.state.loggedIn} />
-          </nav>
-        <div>
-          <div className="d3">
-            <Results history={this.props.history}/>
-          </div>
-          <div className="inner-search">
-            <p className="lead text-center">Another Search?</p>
-            <Search/>
-          </div>
+    if (this.state.graph) {
+      return (
+        <div className="container results">
+            <nav id="resultNav" className="navbar navbar-default navbar-fixed-top">
+              <Logo loggedIn={this.state.loggedIn} />
+            </nav>
           <div>
-            <p className="lead text-center">Related Jobs in Your Area</p>
-            <Jobs />
+            <div className="d3">
+              <Results history={this.props.history}/>
+            </div>
+            <div className="inner-search">
+              <button onClick={this.changeGraph.bind(this)}>Change</button>
+              <p className="lead text-center">Another Search?</p>
+              <Search/>
+            </div>
+            <div>
+              <p className="lead text-center">Related Jobs in Your Area</p>
+              <Jobs />
+            </div>
+            <Footer/>
           </div>
-          <Footer/>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="container results">
+            <nav id="resultNav" className="navbar navbar-default navbar-fixed-top">
+              <Logo loggedIn={this.state.loggedIn} />
+            </nav>
+          <div>
+            <div className="d3">
+              <Results2 history={this.props.history}/>
+            </div>
+            <div className="inner-search">
+              <button onClick={this.changeGraph.bind(this)}>Change</button>
+              <p className="lead text-center">Another Search?</p>
+              <Search/>
+            </div>
+            <div>
+              <p className="lead text-center">Related Jobs in Your Area</p>
+              <Jobs />
+            </div>
+            <Footer/>
+          </div>
+        </div>
+      );
+    }
 
   }
 

@@ -74,11 +74,11 @@ module.exports =
 
 	var _stats2 = _interopRequireDefault(_stats);
 
-	var _logout = __webpack_require__(264);
+	var _logout = __webpack_require__(265);
 
 	var _logout2 = _interopRequireDefault(_logout);
 
-	var _app = __webpack_require__(265);
+	var _app = __webpack_require__(266);
 
 	var _app2 = _interopRequireDefault(_app);
 
@@ -86,15 +86,15 @@ module.exports =
 
 	var _jobs2 = _interopRequireDefault(_jobs);
 
-	var _dashboard = __webpack_require__(275);
+	var _dashboard = __webpack_require__(276);
 
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 
-	var _signupForm = __webpack_require__(280);
+	var _signupForm = __webpack_require__(281);
 
 	var _signupForm2 = _interopRequireDefault(_signupForm);
 
-	var _loginForm = __webpack_require__(282);
+	var _loginForm = __webpack_require__(283);
 
 	var _loginForm2 = _interopRequireDefault(_loginForm);
 
@@ -106,7 +106,7 @@ module.exports =
 
 	var _results2 = _interopRequireDefault(_results);
 
-	var _advancedSearch = __webpack_require__(262);
+	var _advancedSearch = __webpack_require__(263);
 
 	var _advancedSearch2 = _interopRequireDefault(_advancedSearch);
 
@@ -35141,7 +35141,11 @@ module.exports =
 
 	var _results2 = _interopRequireDefault(_results);
 
-	var _advancedSearch = __webpack_require__(262);
+	var _results3 = __webpack_require__(262);
+
+	var _results4 = _interopRequireDefault(_results3);
+
+	var _advancedSearch = __webpack_require__(263);
 
 	var _advancedSearch2 = _interopRequireDefault(_advancedSearch);
 
@@ -35172,53 +35176,114 @@ module.exports =
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Stats).call(this));
 
 	    _this.state = {
-	      loggedIn: (0, _auth.loggedIn)()
+	      loggedIn: (0, _auth.loggedIn)(),
+	      graph: true
 	    };
 	    return _this;
 	  }
 
 	  _createClass(Stats, [{
+	    key: 'changeGraph',
+	    value: function changeGraph() {
+	      console.log(1111111111);
+	      this.setState({
+	        graph: !this.state.graph
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'container results' },
-	        _react2.default.createElement(
-	          'nav',
-	          { id: 'resultNav', className: 'navbar navbar-default navbar-fixed-top' },
-	          _react2.default.createElement(_logo2.default, { loggedIn: this.state.loggedIn })
-	        ),
-	        _react2.default.createElement(
+	      if (this.state.graph) {
+	        return _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'container results' },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'd3' },
-	            _react2.default.createElement(_results2.default, { history: this.props.history })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'inner-search' },
-	            _react2.default.createElement(
-	              'p',
-	              { className: 'lead text-center' },
-	              'Another Search?'
-	            ),
-	            _react2.default.createElement(_search2.default, null)
+	            'nav',
+	            { id: 'resultNav', className: 'navbar navbar-default navbar-fixed-top' },
+	            _react2.default.createElement(_logo2.default, { loggedIn: this.state.loggedIn })
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            null,
 	            _react2.default.createElement(
-	              'p',
-	              { className: 'lead text-center' },
-	              'Related Jobs in Your Area'
+	              'div',
+	              { className: 'd3' },
+	              _react2.default.createElement(_results2.default, { history: this.props.history })
 	            ),
-	            _react2.default.createElement(_jobs2.default, null)
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'inner-search' },
+	              _react2.default.createElement(
+	                'button',
+	                { onClick: this.changeGraph.bind(this) },
+	                'Change'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'lead text-center' },
+	                'Another Search?'
+	              ),
+	              _react2.default.createElement(_search2.default, null)
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'lead text-center' },
+	                'Related Jobs in Your Area'
+	              ),
+	              _react2.default.createElement(_jobs2.default, null)
+	            ),
+	            _react2.default.createElement(_footer2.default, null)
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          { className: 'container results' },
+	          _react2.default.createElement(
+	            'nav',
+	            { id: 'resultNav', className: 'navbar navbar-default navbar-fixed-top' },
+	            _react2.default.createElement(_logo2.default, { loggedIn: this.state.loggedIn })
 	          ),
-	          _react2.default.createElement(_footer2.default, null)
-	        )
-	      );
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'd3' },
+	              _react2.default.createElement(_results4.default, { history: this.props.history })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'inner-search' },
+	              _react2.default.createElement(
+	                'button',
+	                { onClick: this.changeGraph.bind(this) },
+	                'Change'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'lead text-center' },
+	                'Another Search?'
+	              ),
+	              _react2.default.createElement(_search2.default, null)
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'lead text-center' },
+	                'Related Jobs in Your Area'
+	              ),
+	              _react2.default.createElement(_jobs2.default, null)
+	            ),
+	            _react2.default.createElement(_footer2.default, null)
+	          )
+	        );
+	      }
 	    }
 	  }]);
 
@@ -37929,7 +37994,6 @@ module.exports =
 	            this.props.salary.label
 	          )
 	        ),
-	        _react2.default.createElement('hr', null),
 	        _react2.default.createElement(
 	          Chart,
 	          { width: this.state.width,
@@ -47534,6 +47598,103 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _d = __webpack_require__(261);
+
+	var _d2 = _interopRequireDefault(_d);
+
+	var _reactRouter = __webpack_require__(158);
+
+	var _reactRedux = __webpack_require__(229);
+
+	var _redux = __webpack_require__(236);
+
+	var _actionCreator = __webpack_require__(255);
+
+	var _search = __webpack_require__(258);
+
+	var _search2 = _interopRequireDefault(_search);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Import all required modules
+
+
+	// Import all actions & helper methods
+
+
+	// Import all containers
+
+
+	var Results2 = function (_React$Component) {
+	  _inherits(Results2, _React$Component);
+
+	  function Results2(props) {
+	    _classCallCheck(this, Results2);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Results2).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(Results2, [{
+	    key: 'render',
+	    value: function render() {
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'selection' },
+	          _react2.default.createElement(
+	            'h3',
+	            { className: 'text-center' },
+	            'Test'
+	          )
+	        ),
+	        _react2.default.createElement('hr', null)
+	      );
+	    }
+	  }]);
+
+	  return Results2;
+	}(_react2.default.Component);
+
+	;
+
+	function mapStateToProps(state) {
+	  return {
+	    salary: state.salary
+	  };
+	}
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ setSearch: _actionCreator.setSearch }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Results2);
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _jquery = __webpack_require__(222);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
@@ -47548,7 +47709,7 @@ module.exports =
 
 	var _auth = __webpack_require__(221);
 
-	var _advanceSearchInput = __webpack_require__(263);
+	var _advanceSearchInput = __webpack_require__(264);
 
 	var _advanceSearchInput2 = _interopRequireDefault(_advanceSearchInput);
 
@@ -47748,7 +47909,7 @@ module.exports =
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AdvancedSearch);
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47976,7 +48137,7 @@ module.exports =
 	exports.default = AdvancedSearchInput;
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48035,7 +48196,7 @@ module.exports =
 	exports.default = Logout;
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48064,11 +48225,11 @@ module.exports =
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _main = __webpack_require__(266);
+	var _main = __webpack_require__(267);
 
 	var _main2 = _interopRequireDefault(_main);
 
-	var _cloud = __webpack_require__(267);
+	var _cloud = __webpack_require__(268);
 
 	var _cloud2 = _interopRequireDefault(_cloud);
 
@@ -48168,7 +48329,7 @@ module.exports =
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -48207,7 +48368,7 @@ module.exports =
 	exports.default = Main;
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48222,7 +48383,7 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactTagcloud = __webpack_require__(268);
+	var _reactTagcloud = __webpack_require__(269);
 
 	var _jquery = __webpack_require__(222);
 
@@ -48293,7 +48454,7 @@ module.exports =
 	exports.default = Cloud;
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48303,7 +48464,7 @@ module.exports =
 	});
 	exports.defaultRenderer = exports.DefaultRenderer = exports.TagCloud = undefined;
 
-	var _TagCloud = __webpack_require__(269);
+	var _TagCloud = __webpack_require__(270);
 
 	Object.defineProperty(exports, 'TagCloud', {
 	  enumerable: true,
@@ -48312,7 +48473,7 @@ module.exports =
 	  }
 	});
 
-	var _defaultRenderer = __webpack_require__(270);
+	var _defaultRenderer = __webpack_require__(271);
 
 	var deprecatedRendererExport = function deprecatedRendererExport() {
 	  // eslint-disable-next-line no-console
@@ -48324,7 +48485,7 @@ module.exports =
 	exports.defaultRenderer = _defaultRenderer.defaultRenderer;
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48340,13 +48501,13 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _defaultRenderer = __webpack_require__(270);
+	var _defaultRenderer = __webpack_require__(271);
 
-	var _arrayShuffle = __webpack_require__(273);
+	var _arrayShuffle = __webpack_require__(274);
 
 	var _arrayShuffle2 = _interopRequireDefault(_arrayShuffle);
 
-	var _helpers = __webpack_require__(274);
+	var _helpers = __webpack_require__(275);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48447,7 +48608,7 @@ module.exports =
 	};
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48461,11 +48622,11 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _randomcolor = __webpack_require__(271);
+	var _randomcolor = __webpack_require__(272);
 
 	var _randomcolor2 = _interopRequireDefault(_randomcolor);
 
-	var _objectAssign = __webpack_require__(272);
+	var _objectAssign = __webpack_require__(273);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -48522,7 +48683,7 @@ module.exports =
 	};
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// randomColor by David Merfield under the CC0 license
@@ -48957,7 +49118,7 @@ module.exports =
 
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -49046,7 +49207,7 @@ module.exports =
 
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -49072,7 +49233,7 @@ module.exports =
 
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -49124,7 +49285,7 @@ module.exports =
 	};
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49149,7 +49310,7 @@ module.exports =
 
 	var _redux = __webpack_require__(236);
 
-	var _reactUseravatar = __webpack_require__(276);
+	var _reactUseravatar = __webpack_require__(277);
 
 	var _reactUseravatar2 = _interopRequireDefault(_reactUseravatar);
 
@@ -49157,11 +49318,11 @@ module.exports =
 
 	var _auth = __webpack_require__(221);
 
-	var _flash = __webpack_require__(278);
+	var _flash = __webpack_require__(279);
 
 	var _flash2 = _interopRequireDefault(_flash);
 
-	var _dashboardDataInput = __webpack_require__(279);
+	var _dashboardDataInput = __webpack_require__(280);
 
 	var _dashboardDataInput2 = _interopRequireDefault(_dashboardDataInput);
 
@@ -49523,7 +49684,7 @@ module.exports =
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 /***/ },
-/* 276 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -49531,12 +49692,12 @@ module.exports =
 	 * Links : https://github.com/bltnico
 	 */
 
-	var UserAvatar = __webpack_require__(277);
+	var UserAvatar = __webpack_require__(278);
 	module.exports = UserAvatar;
 
 
 /***/ },
-/* 277 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49753,7 +49914,7 @@ module.exports =
 	};
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -49811,7 +49972,7 @@ module.exports =
 	exports.default = Flash;
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49958,7 +50119,7 @@ module.exports =
 	exports.default = DataInput;
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49985,7 +50146,7 @@ module.exports =
 
 	var _actionCreator = __webpack_require__(255);
 
-	var _signupInput = __webpack_require__(281);
+	var _signupInput = __webpack_require__(282);
 
 	var _signupInput2 = _interopRequireDefault(_signupInput);
 
@@ -50136,7 +50297,7 @@ module.exports =
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SignForm);
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50278,7 +50439,7 @@ module.exports =
 	exports.default = SignupInput;
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50305,11 +50466,11 @@ module.exports =
 
 	var _actionCreator = __webpack_require__(255);
 
-	var _flash = __webpack_require__(278);
+	var _flash = __webpack_require__(279);
 
 	var _flash2 = _interopRequireDefault(_flash);
 
-	var _loginInput = __webpack_require__(283);
+	var _loginInput = __webpack_require__(284);
 
 	var _loginInput2 = _interopRequireDefault(_loginInput);
 
@@ -50317,7 +50478,7 @@ module.exports =
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _advancedSearch = __webpack_require__(262);
+	var _advancedSearch = __webpack_require__(263);
 
 	var _advancedSearch2 = _interopRequireDefault(_advancedSearch);
 
@@ -50482,7 +50643,7 @@ module.exports =
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginForm);
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

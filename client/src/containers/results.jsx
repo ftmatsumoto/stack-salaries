@@ -170,7 +170,6 @@ class Results extends React.Component {
             <div className="selection">
               <h3 className="text-center">{this.props.salary.label}</h3>
             </div>
-            <hr/>
             <Chart width={this.state.width}
                    height={this.state.height}>
               <Bar data={[
