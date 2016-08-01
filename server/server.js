@@ -174,6 +174,13 @@ app.post('/savetoken', function(req, res, next) {
   })
 })
 
+app.post('/loggedIn', function(req, res, next) {
+  User.findOne({token: req.body.token}, function(err, user) {
+    if (err) {return next(err)}
+    res.json({user});
+  })
+})
+
 // Log out a user
 // Note, React Router is currently handling this
 app.get('/logout', logout(), function(req, res, next){

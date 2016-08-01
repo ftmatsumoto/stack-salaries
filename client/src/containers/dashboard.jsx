@@ -131,22 +131,30 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount(){
-    // query to grab userData array from user logged in
-    // change after add token to the database
-    $.ajax({
-      url:"/user?name=aaaaa",
-      type:"GET",
-      contentType:"application/json",
-      success: (data) => {
-        console.log(data);
-        this.setState({
-          userData: data[0].userData
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+    if (this.state.loggedIn()) {
+      // query to grab userData array from user logged in
+      // change after add token to the database
+      $.ajax({
+        url:"/loggedIn",
+        type:"POST",
+        contentType:"application/json",
+        data: JSON.stringify({token: window.sessionStorage.token}),
+        success: (data) => {
+          if (data.user.id) {
+            this.props.setUserInfo(data.user);
+            this.setState({
+              userData: data.userData;
+            });
+          } else {
+            console.error('Failure to find active user ');
+            console.log(data.err);
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
   }
 
   render() {
