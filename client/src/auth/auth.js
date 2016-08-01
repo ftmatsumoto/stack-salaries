@@ -13,13 +13,13 @@ export function loggedIn(){
 // Deletes the localStorage token
 // New tokens are sent every time a user logs in
 export function logOut(){
+  delete window.sessionStorage.token;
   $.ajax({
     url: "/logout",
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify({token: window.sessionStorage.token}),
     success: function(data) {
-      delete window.sessionStorage.token;
       if (!data.deleted) {
         console.error('Failure to find active user');
       }

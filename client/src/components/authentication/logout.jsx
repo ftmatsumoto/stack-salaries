@@ -27,4 +27,3 @@ Logout.contextTypes= {
 
 
 export default Logout;
-

@@ -49,10 +49,29 @@ class SignForm extends React.Component{
     })
   }
 
- redirectToDashboard(userData){
-    console.log("WHATS IN THIS " + JSON.stringify(userData));
-    this.props.setUserInfo(userData.user);
-    this.context.router.push('/dashboard');
+ redirectToDashboard(user){
+    if(user.id){
+      var self = this;
+      $.ajax({
+        url: "/savetoken",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({email: user.email, token: window.sessionStorage.token}),
+        success: function(data) {
+          self.props.setUserInfo(data.user);
+          self.context.router.push('/dashboard');
+        },
+        error: function(err) {
+          console.error(err);
+        }
+      })
+    } else {
+       this.setState({
+          hasError: true,
+          errorType: "alert alert-danger",
+          errorMessage: "Please check your email and password and try again!"
+       });
+    }
   }
 
 
@@ -60,20 +79,24 @@ class SignForm extends React.Component{
     e.preventDefault();
     var self = this;
 
-    var data = {name: this.state.name, email: this.state.email, password: this.state.password, gender: this.state.gender};
+    var data = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      gender: this.state.gender
+    };
 
     $.ajax({
       url:"/signup",
       type:"POST",
       contentType:"application/json",
       data: JSON.stringify(data),
-      success: function(results) {
-        console.log(data);
-        window.sessionStorage.setItem('token', results.token),
+      success: function(data) {
+        window.sessionStorage.setItem('token', data.token),
         self.setState({
-          authToken: results.token
+          authToken: data.token
         });
-        self.redirectToDashboard(results);
+        self.redirectToDashboard(data.user);
       },
       error: function(err) {
         console.log(err);

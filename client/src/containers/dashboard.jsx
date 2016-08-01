@@ -16,8 +16,8 @@ import Logo from '../components/navigation/logo';
 
 class Dashboard extends React.Component {
 
-  constructor (){
-    super();
+  constructor (props){
+    super(props);
     this.state = {
       state:'',
       city: '',
@@ -118,7 +118,7 @@ class Dashboard extends React.Component {
       contentType:"application/json",
       data: JSON.stringify({salaryInfo: data, token: window.sessionStorage.token}),
       success: (data) => {
-        this.setState({
+        self.setState({
           userData: data
         });
         self.submitToStore();
@@ -131,19 +131,20 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount(){
-    if (this.state.loggedIn()) {
+    if (window.sessionStorage.token) {
       // query to grab userData array from user logged in
       // change after add token to the database
+      var self = this;
       $.ajax({
         url:"/loggedIn",
         type:"POST",
         contentType:"application/json",
         data: JSON.stringify({token: window.sessionStorage.token}),
         success: (data) => {
-          if (data.user.id) {
-            this.props.setUserInfo(data.user);
-            this.setState({
-              userData: data.userData;
+          if (data.user) {
+            self.props.setUserInfo(data.user);
+            self.setState({
+              userData: data.user.userData
             });
           } else {
             console.error('Failure to find active user ');

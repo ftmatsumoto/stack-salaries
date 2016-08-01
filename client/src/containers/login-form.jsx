@@ -51,14 +51,15 @@ class LoginForm extends React.Component {
 
   redirectToDashboard(user){
     if(user.id){
+      var self = this;
       $.ajax({
         url: "/savetoken",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify({email: user.email, token: window.sessionStorage.token}),
         success: function(data) {
-          this.props.setUserInfo(data.user);
-          this.context.router.push('/dashboard');
+          self.props.setUserInfo(data.user);
+          self.context.router.push('/dashboard');
         },
         error: function(err) {
           console.error(err);
