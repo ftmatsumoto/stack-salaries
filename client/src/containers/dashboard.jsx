@@ -16,8 +16,8 @@ import Logo from '../components/navigation/logo';
 
 class Dashboard extends React.Component {
 
-  constructor (){
-    super();
+  constructor (props){
+    super(props);
     this.state = {
       state:'',
       city: '',
@@ -118,7 +118,7 @@ class Dashboard extends React.Component {
       contentType:"application/json",
       data: JSON.stringify({salaryInfo: data, token: window.sessionStorage.token}),
       success: (data) => {
-        this.setState({
+        self.setState({
           userData: data
         });
         self.submitToStore();
@@ -131,22 +131,31 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount(){
-    // query to grab userData array from user logged in
-    // change after add token to the database
-    $.ajax({
-      url:"/user?name=aaaaa",
-      type:"GET",
-      contentType:"application/json",
-      success: (data) => {
-        console.log(data);
-        this.setState({
-          userData: data[0].userData
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+    if (window.sessionStorage.token) {
+      // query to grab userData array from user logged in
+      // change after add token to the database
+      var self = this;
+      $.ajax({
+        url:"/loggedIn",
+        type:"POST",
+        contentType:"application/json",
+        data: JSON.stringify({token: window.sessionStorage.token}),
+        success: (data) => {
+          if (data.user) {
+            self.props.setUserInfo(data.user);
+            self.setState({
+              userData: data.user.userData
+            });
+          } else {
+            console.error('Failure to find active user ');
+            console.log(data.err);
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
   }
 
   render() {

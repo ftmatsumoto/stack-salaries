@@ -145,7 +145,9 @@ app.post('/signup', function(req, res, next) {
       name: name,
       email: email,
       password: password,
-      gender: gender
+      gender: gender,
+      token: null,
+      firstSave: true
     });
 
     user.save(function(err){
@@ -162,10 +164,39 @@ app.post('/signup', function(req, res, next) {
 
 });
 
+app.post('/savetoken', function(req, res, next) {
+  User.findOne({email: req.body.email}, function(err, user) {
+    if (err) { return next(err) }
+    console.log('SAVE TOKEN', req.body.token);
+    user.token = req.body.token;
+    user.save(function(err) {
+      if (err) { return next(err) }
+      res.json({user});
+    })
+  })
+})
+
+app.post('/loggedIn', function(req, res, next) {
+  User.findOne({token: req.body.token}, function(err, user) {
+    if (err) {return next(err)}
+    res.json({user});
+  })
+})
+
 // Log out a user
 // Note, React Router is currently handling this
-app.get('/logout', logout(), function(req, res, next){
-  res.redirect('/login');
+app.post('/logout', function(req, res, next){
+  User.findOne({token: req.body.token}, function(err, user) {
+    if (user) {
+      user.token = null;
+      user.save(function(err) {
+        if (err) {return next(err)}
+        res.json({deleted: true});
+      })
+    } else {
+      res.json({deleted: false});
+    }
+  })
 });
 
 // Root Path

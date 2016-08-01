@@ -18,9 +18,9 @@ import AdvancedSearch from '../containers/advanced-search';
 
 
 class LoginForm extends React.Component {
-  constructor() {
+  constructor(props) {
 
-    super();
+    super(props);
 
     this.state = {
       email: "",
@@ -49,10 +49,22 @@ class LoginForm extends React.Component {
     });
   }
 
-  redirectToDashboard(userData){
-    if(userData.id){
-      this.props.setUserInfo(userData);
-      this.context.router.push('/dashboard');
+  redirectToDashboard(user){
+    if(user.id){
+      var self = this;
+      $.ajax({
+        url: "/savetoken",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({email: user.email, token: window.sessionStorage.token}),
+        success: function(data) {
+          self.props.setUserInfo(data.user);
+          self.context.router.push('/dashboard');
+        },
+        error: function(err) {
+          console.error(err);
+        }
+      })
     } else {
        this.setState({
           hasError: true,
@@ -78,6 +90,7 @@ class LoginForm extends React.Component {
       contentType:"application/json",
       data: JSON.stringify(data),
       success: function(data) {
+        console.log('SIGNIN AJAX ', data);
         window.sessionStorage.setItem('token', data.token),
         self.setState({
           authToken: data.token,
