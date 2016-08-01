@@ -49,10 +49,18 @@ class LoginForm extends React.Component {
     });
   }
 
-  redirectToDashboard(userData){
-    if(userData.id){
-      this.props.setUserInfo(userData);
-      this.context.router.push('/dashboard');
+  redirectToDashboard(user){
+    if(user.id){
+      $.ajax({
+        url: "/savetoken",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({email: user.email, token: window.sessionStorage.token}),
+        success: function(data) {
+          this.props.setUserInfo(data.user);
+          this.context.router.push('/dashboard');
+        }
+      })
     } else {
        this.setState({
           hasError: true,

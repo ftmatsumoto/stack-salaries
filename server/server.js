@@ -142,10 +142,11 @@ app.post('/signup', function(req, res, next) {
 
     // If not, create and save user
     var user = new User({
-      name: name,
-      email: email,
-      password: password,
-      gender: gender
+      name,
+      email,
+      password,
+      gender,
+      token: null
     });
 
     user.save(function(err){
@@ -161,6 +162,17 @@ app.post('/signup', function(req, res, next) {
   });
 
 });
+
+app.post('/savetoken', function(req, res, next) {
+  User.findOne({email: req.body.email}, function(err, user) {
+    if (err) { return next(err) }
+    user.token = req.body.token;
+    user.save(function(err) {
+      if (err) { return next(err) }
+      res.json({user});
+    })
+  })
+})
 
 // Log out a user
 // Note, React Router is currently handling this

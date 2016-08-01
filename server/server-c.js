@@ -209,7 +209,8 @@ app.post('/signup', function (req, res, next) {
       name: name,
       email: email,
       password: password,
-      gender: gender
+      gender: gender,
+      token: null
     });
 
     user.save(function (err) {
