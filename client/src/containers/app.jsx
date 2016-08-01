@@ -6,7 +6,8 @@ import { bindActionCreators } from 'redux';
 
 // Import all actions & helper methods
 import { loggedIn } from '../auth/auth';
-import { setUserInfo } from '../actions/actionCreator';
+import { setUserInfo, setSearchValue } from '../actions/actionCreator';
+
 
 // Import all needed components
 import Login from '../components/authentication/login';
@@ -18,11 +19,22 @@ import Search from '../containers/search';
 
 class App extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       loggedIn: loggedIn()
+    }
+
+    // this.addStack.bind(this);
+
+  }
+
+  addStack(tag) {
+    if (!this.props.searchValue) {
+      this.props.setSearchValue(tag.value);
+    } else {
+      this.props.setSearchValue(this.props.searchValue + ', ' + tag.value);
     }
   }
 
@@ -36,8 +48,8 @@ class App extends React.Component {
           </nav>
           <Main/>
 
-          <Search history={this.props.history}/>
-          <Cloud/>
+          <Search history={this.props.history} searchValue={this.props.searchValue}/>
+          <Cloud addStack={this.addStack.bind(this)}/>
 
 
         </div>
@@ -56,12 +68,13 @@ App.contextTypes = {
 
 function mapStateToProps(state) {
   return {
-    userInfo: state.userInfo
+    userInfo: state.userInfo,
+    searchValue: state.searchValue
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({setUserInfo: setUserInfo}, dispatch);
+  return bindActionCreators({setUserInfo, setSearchValue}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

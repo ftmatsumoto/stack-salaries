@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Import all actions & helper methods
-import { setSearch, setCityState } from '../actions/actionCreator';
+import { setSearch, setCityState, setSearchValue } from '../actions/actionCreator';
 
 // Import all needed components
 import SearchInput from '../components/search/search-input';
@@ -97,6 +97,7 @@ class Search extends React.Component{
           getDatafromServer = {this.getDatafromServer}
           findStack = {this.findStack}
           findCityState= {this.findCityState}
+          searchValue = {this.props.searchValue}
         />
       </div>
     );

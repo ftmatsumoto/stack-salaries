@@ -4,6 +4,7 @@
 export const SET_SEARCH = 'SET_SEARCH';
 export const SET_USERINFO = 'SET_USERINFO';
 export const SET_CITYSTATE = 'SET_CITYSTATE';
+export const SET_SEARCHVALUE = 'SET_SEARCHVALUE';
 
 export function setSearch(searchInput) {
   return {
@@ -24,4 +25,11 @@ export function setUserInfo(userData)  {
     type: SET_USERINFO,
     payload: userData
   };
+}
+
+export function setSearchValue(searchValue) {
+  return {
+    type: SET_SEARCHVALUE,
+    payload: searchValue
+  }
 }

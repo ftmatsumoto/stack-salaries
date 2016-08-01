@@ -72,11 +72,38 @@ app.post('/stackentry', function(req, res, next) {
   });
 });
 
+app.get('/getstacks', function(req, res, next) {
+  User.find({}, function(err, users) {
+    if (err) { return next(err) }
+    var stacks = {};
+    var data = [];
+    users.forEach(function(user) {
+      user.userData.forEach(function(salary) {
+        var stack = salary.stack;
+        var stackArr = stack.split(', ');
+        if (stackArr.length > 1) {
+          stackArr.forEach(function(stack) {
+            stacks[stack] ? stacks[stack]++ : stacks[stack] = 1;
+          })
+        } else {
+          stacks[stack] ? stacks[stack]++ : stacks[stack] = 1;
+        }
+      })
+    })
+
+    for (var key in stacks) {
+      data.push({value: key, count: stacks[key]});
+    }
+
+    res.json({stacks: data});
+  })
+})
+
 // GET all users
 app.get('/users', requireAuth, function(req, res, next) {
   User.find({}, function(err, users) {
     if(!err) {
-      res.send(200, users);
+      res.json({users});
     } else {
       throw err;
     }

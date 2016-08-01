@@ -37559,12 +37559,14 @@
 	exports.setSearch = setSearch;
 	exports.setCityState = setCityState;
 	exports.setUserInfo = setUserInfo;
+	exports.setSearchValue = setSearchValue;
 	// These constants are used in different reducers
 	// Using a constant ensures you'll only need to change
 	// a string value in one place - easier to maintain
 	var SET_SEARCH = exports.SET_SEARCH = 'SET_SEARCH';
 	var SET_USERINFO = exports.SET_USERINFO = 'SET_USERINFO';
 	var SET_CITYSTATE = exports.SET_CITYSTATE = 'SET_CITYSTATE';
+	var SET_SEARCHVALUE = exports.SET_SEARCHVALUE = 'SET_SEARCHVALUE';
 
 	function setSearch(searchInput) {
 	  return {
@@ -37584,6 +37586,13 @@
 	  return {
 	    type: SET_USERINFO,
 	    payload: userData
+	  };
+	}
+
+	function setSearchValue(searchValue) {
+	  return {
+	    type: SET_SEARCHVALUE,
+	    payload: searchValue
 	  };
 	}
 
@@ -37842,7 +37851,8 @@
 	        _react2.default.createElement(_searchInput2.default, {
 	          getDatafromServer: this.getDatafromServer,
 	          findStack: this.findStack,
-	          findCityState: this.findCityState
+	          findCityState: this.findCityState,
+	          searchValue: this.props.searchValue
 	        })
 	      );
 	    }
@@ -37879,47 +37889,90 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRouter = __webpack_require__(188);
 
+	var _reactRedux = __webpack_require__(160);
+
+	var _redux = __webpack_require__(167);
+
+	var _actionCreator = __webpack_require__(258);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var SearchInput = function SearchInput(props) {
-	  return _react2.default.createElement(
-	    'form',
-	    { className: 'flexcontainer', onSubmit: props.getDatafromServer },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'input-group' },
-	      _react2.default.createElement('span', { className: 'glyphicon glyphicon-search' }),
-	      _react2.default.createElement('input', {
-	        type: 'text',
-	        className: 'form-control',
-	        value: props.stack,
-	        onChange: props.findStack,
-	        placeholder: 'Add your tech stack separated by commas'
-	      }),
-	      _react2.default.createElement('input', {
-	        type: 'text',
-	        id: 'searchTextField',
-	        className: 'city form-control',
-	        value: props.cityState,
-	        onChange: props.findCityState,
-	        placeholder: 'New York, NY'
-	      }),
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-primary' },
-	        'Search'
-	      )
-	    )
-	  );
-	};
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SearchInput = function (_React$Component) {
+	  _inherits(SearchInput, _React$Component);
+
+	  function SearchInput(props) {
+	    _classCallCheck(this, SearchInput);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SearchInput).call(this, props));
+	  }
+
+	  _createClass(SearchInput, [{
+	    key: 'render',
+	    value: function render() {
+
+	      return _react2.default.createElement(
+	        'form',
+	        { className: 'flexcontainer', onSubmit: this.props.getDatafromServer },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'input-group' },
+	          _react2.default.createElement('span', { className: 'glyphicon glyphicon-search' }),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            className: 'form-control',
+	            value: this.props.searchValue,
+	            onChange: this.props.findStack,
+	            placeholder: 'Add your tech stack separated by commas'
+	          }),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            id: 'searchTextField',
+	            className: 'city form-control',
+	            value: this.props.cityState,
+	            onChange: this.props.findCityState,
+	            placeholder: 'New York, NY'
+	          }),
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'btn btn-primary' },
+	            'Search'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return SearchInput;
+	}(_react2.default.Component);
 
 	exports.default = SearchInput;
+
+
+	function mapStateToProps(state) {
+	  return {
+	    searchValue: state.searchValue
+	  };
+	}
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ setSearchValue: _actionCreator.setSearchValue }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SearchInput);
 
 /***/ },
 /* 263 */
@@ -48260,18 +48313,30 @@
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 
-	  function App() {
+	  function App(props) {
 	    _classCallCheck(this, App);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
 
 	    _this.state = {
 	      loggedIn: (0, _auth.loggedIn)()
 	    };
+
+	    // this.addStack.bind(this);
+
 	    return _this;
 	  }
 
 	  _createClass(App, [{
+	    key: 'addStack',
+	    value: function addStack(tag) {
+	      if (!this.props.searchValue) {
+	        this.props.setSearchValue(tag.value);
+	      } else {
+	        this.props.setSearchValue(this.props.searchValue + ', ' + tag.value);
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -48289,8 +48354,8 @@
 	              _react2.default.createElement(_login2.default, { loggedIn: this.state.loggedIn, userInfo: this.props.userInfo })
 	            ),
 	            _react2.default.createElement(_main2.default, null),
-	            _react2.default.createElement(_search2.default, { history: this.props.history }),
-	            _react2.default.createElement(_cloud2.default, null)
+	            _react2.default.createElement(_search2.default, { history: this.props.history, searchValue: this.props.searchValue }),
+	            _react2.default.createElement(_cloud2.default, { addStack: this.addStack.bind(this) })
 	          )
 	        ),
 	        _react2.default.createElement('div', { className: 'art' })
@@ -48307,12 +48372,13 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    userInfo: state.userInfo
+	    userInfo: state.userInfo,
+	    searchValue: state.searchValue
 	  };
 	}
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ setUserInfo: _actionCreator.setUserInfo }, dispatch);
+	  return (0, _redux.bindActionCreators)({ setUserInfo: _actionCreator.setUserInfo, setSearchValue: _actionCreator.setSearchValue }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
@@ -48360,11 +48426,13 @@
 /* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(2);
 
@@ -48372,20 +48440,71 @@
 
 	var _reactTagcloud = __webpack_require__(271);
 
+	var _jquery = __webpack_require__(251);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var data = [{ value: "Angular", count: 38 }, { value: "React", count: 30 }, { value: "Nodejs", count: 28 }, { value: "Express.js", count: 25 }, { value: "HTML5", count: 33 }, { value: "CSS3", count: 33 }, { value: "MongoDB", count: 18 }, { value: "MEAN", count: 50 }, { value: "JavaScript", count: 70 }, { value: "PHP", count: 30 }, { value: "JQuery", count: 40 }, { value: "MERN", count: 20 }, { value: "Vue", count: 10 }, { value: "Backbone", count: 10 }];
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Cloud = function Cloud() {
-	  return _react2.default.createElement(_reactTagcloud.TagCloud, { minSize: 12,
-	    maxSize: 35,
-	    tags: data,
-	    style: { width: 600 },
-	    className: "stackCloud",
-	    onClick: function onClick(tag) {
-	      return console.log('clicking on tag:', tag);
-	    } });
-	};
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var dummyData = [{ value: "Angular", count: 38 }, { value: "React", count: 30 }, { value: "Nodejs", count: 28 }, { value: "Express.js", count: 25 }, { value: "HTML5", count: 33 }, { value: "CSS3", count: 33 }, { value: "MongoDB", count: 18 }, { value: "MEAN", count: 50 }, { value: "JavaScript", count: 70 }, { value: "PHP", count: 30 }, { value: "JQuery", count: 40 }, { value: "MERN", count: 20 }, { value: "Vue", count: 10 }, { value: "Backbone", count: 10 }];
+
+	var renderer = (0, _reactTagcloud.defaultRenderer)({
+	  colorOptions: {
+	    luminosity: 'light',
+	    hue: 'green'
+	  }
+	});
+
+	var Cloud = function (_React$Component) {
+	  _inherits(Cloud, _React$Component);
+
+	  function Cloud(props) {
+	    _classCallCheck(this, Cloud);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Cloud).call(this, props));
+
+	    _this.state = {
+	      stacks: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Cloud, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var self = this;
+	      _jquery2.default.ajax({
+	        url: "/getstacks",
+	        type: "GET",
+	        success: function success(data) {
+	          self.setState({ stacks: data.stacks });
+	        },
+	        error: function error() {
+	          console.error('Failed to load user stacks');
+	          self.setState({ stacks: dummyData });
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_reactTagcloud.TagCloud, { renderer: renderer,
+	        minSize: 12,
+	        maxSize: 35,
+	        tags: this.state.stacks,
+	        className: 'stackCloud',
+	        onClick: this.props.addStack });
+	    }
+	  }]);
+
+	  return Cloud;
+	}(_react2.default.Component);
 
 	exports.default = Cloud;
 
@@ -50658,18 +50777,23 @@
 
 	var _cityStateReducer2 = _interopRequireDefault(_cityStateReducer);
 
+	var _searchValueReducer = __webpack_require__(291);
+
+	var _searchValueReducer2 = _interopRequireDefault(_searchValueReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// The root reducer combines all reducers declared
 	// in the reducer directory
-	// Import all required modules
+
+
+	// Import all needed components
 	var rootReducer = (0, _redux.combineReducers)({
 	  salary: _searchReducer2.default,
 	  userInfo: _userInfoReducer2.default,
-	  cityState: _cityStateReducer2.default
-	});
-
-	// Import all needed components
+	  cityState: _cityStateReducer2.default,
+	  searchValue: _searchValueReducer2.default
+	}); // Import all required modules
 	exports.default = rootReducer;
 
 /***/ },
@@ -50734,6 +50858,29 @@
 
 	  switch (action.type) {
 	    case _actionCreator.SET_CITYSTATE:
+	      return action.payload;
+	  }
+	  return state;
+	};
+
+	var _actionCreator = __webpack_require__(258);
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _actionCreator.SET_SEARCHVALUE:
 	      return action.payload;
 	  }
 	  return state;
