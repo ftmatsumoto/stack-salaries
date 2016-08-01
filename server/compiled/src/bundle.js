@@ -49075,14 +49075,14 @@ module.exports =
 	    key: 'submitToStore',
 	    value: function submitToStore() {
 	      var data = {
-	        stack: this.state.stack,
-	        city: this.state.city,
-	        state: this.state.state,
-	        education: this.state.education,
-	        experience: this.state.experience,
-	        position: this.state.position,
-	        salary: this.state.salary,
-	        gender: this.props.userInfo.gender
+	        stack: this.state.stack.toLowerCase(),
+	        city: this.state.city.toLowerCase(),
+	        state: this.state.state.toLowerCase(),
+	        education: this.state.education.toLowerCase(),
+	        experience: this.state.experience.toLowerCase(),
+	        position: this.state.position.toLowerCase(),
+	        salary: this.state.salary.toLowerCase(),
+	        gender: this.props.userInfo.gender.toLowerCase()
 	      };
 	      // this.props.setUserInfo(data);
 	    }
@@ -49094,14 +49094,14 @@ module.exports =
 	      var self = this;
 
 	      var data = {
-	        stack: this.state.stack,
-	        city: this.state.city,
-	        state: this.state.state,
-	        education: this.state.education,
-	        experience: this.state.experience,
-	        position: this.state.position,
-	        salary: this.state.salary,
-	        gender: this.props.userInfo.gender
+	        stack: this.state.stack.toLowerCase(),
+	        city: this.state.city.toLowerCase(),
+	        state: this.state.state.toLowerCase(),
+	        education: this.state.education.toLowerCase(),
+	        experience: this.state.experience.toLowerCase(),
+	        position: this.state.position.toLowerCase(),
+	        salary: this.state.salary.toLowerCase(),
+	        gender: this.props.userInfo.gender.toLowerCase()
 	      };
 
 	      _jquery2.default.ajax({
