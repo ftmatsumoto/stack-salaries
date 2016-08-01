@@ -56,7 +56,7 @@ class Cloud extends React.Component {
           maxSize={35}
           tags={this.state.stacks}
           className="stackCloud"
-          onClick={tag => console.log('clicking on tag:', tag)} />
+          onClick={this.props.addStack} />
     );
   }
 }

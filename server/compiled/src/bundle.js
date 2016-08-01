@@ -37269,12 +37269,14 @@ module.exports =
 	exports.setSearch = setSearch;
 	exports.setCityState = setCityState;
 	exports.setUserInfo = setUserInfo;
+	exports.setSearchValue = setSearchValue;
 	// These constants are used in different reducers
 	// Using a constant ensures you'll only need to change
 	// a string value in one place - easier to maintain
 	var SET_SEARCH = exports.SET_SEARCH = 'SET_SEARCH';
 	var SET_USERINFO = exports.SET_USERINFO = 'SET_USERINFO';
 	var SET_CITYSTATE = exports.SET_CITYSTATE = 'SET_CITYSTATE';
+	var SET_SEARCHVALUE = exports.SET_SEARCHVALUE = 'SET_SEARCHVALUE';
 
 	function setSearch(searchInput) {
 	  return {
@@ -37294,6 +37296,13 @@ module.exports =
 	  return {
 	    type: SET_USERINFO,
 	    payload: userData
+	  };
+	}
+
+	function setSearchValue(searchValue) {
+	  return {
+	    type: SET_SEARCHVALUE,
+	    payload: searchValue
 	  };
 	}
 
@@ -37552,7 +37561,8 @@ module.exports =
 	        _react2.default.createElement(_searchInput2.default, {
 	          getDatafromServer: this.getDatafromServer,
 	          findStack: this.findStack,
-	          findCityState: this.findCityState
+	          findCityState: this.findCityState,
+	          searchValue: this.props.searchValue
 	        })
 	      );
 	    }
@@ -37589,47 +37599,90 @@ module.exports =
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRouter = __webpack_require__(158);
 
+	var _reactRedux = __webpack_require__(229);
+
+	var _redux = __webpack_require__(236);
+
+	var _actionCreator = __webpack_require__(255);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var SearchInput = function SearchInput(props) {
-	  return _react2.default.createElement(
-	    'form',
-	    { className: 'flexcontainer', onSubmit: props.getDatafromServer },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'input-group' },
-	      _react2.default.createElement('span', { className: 'glyphicon glyphicon-search' }),
-	      _react2.default.createElement('input', {
-	        type: 'text',
-	        className: 'form-control',
-	        value: props.stack,
-	        onChange: props.findStack,
-	        placeholder: 'Add your tech stack separated by commas'
-	      }),
-	      _react2.default.createElement('input', {
-	        type: 'text',
-	        id: 'searchTextField',
-	        className: 'city form-control',
-	        value: props.cityState,
-	        onChange: props.findCityState,
-	        placeholder: 'New York, NY'
-	      }),
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-primary' },
-	        'Search'
-	      )
-	    )
-	  );
-	};
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SearchInput = function (_React$Component) {
+	  _inherits(SearchInput, _React$Component);
+
+	  function SearchInput(props) {
+	    _classCallCheck(this, SearchInput);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SearchInput).call(this, props));
+	  }
+
+	  _createClass(SearchInput, [{
+	    key: 'render',
+	    value: function render() {
+
+	      return _react2.default.createElement(
+	        'form',
+	        { className: 'flexcontainer', onSubmit: this.props.getDatafromServer },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'input-group' },
+	          _react2.default.createElement('span', { className: 'glyphicon glyphicon-search' }),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            className: 'form-control',
+	            value: this.props.searchValue,
+	            onChange: this.props.findStack,
+	            placeholder: 'Add your tech stack separated by commas'
+	          }),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            id: 'searchTextField',
+	            className: 'city form-control',
+	            value: this.props.cityState,
+	            onChange: this.props.findCityState,
+	            placeholder: 'New York, NY'
+	          }),
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'btn btn-primary' },
+	            'Search'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return SearchInput;
+	}(_react2.default.Component);
 
 	exports.default = SearchInput;
+
+
+	function mapStateToProps(state) {
+	  return {
+	    searchValue: state.searchValue
+	  };
+	}
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ setSearchValue: _actionCreator.setSearchValue }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SearchInput);
 
 /***/ },
 /* 260 */
@@ -47970,18 +48023,30 @@ module.exports =
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 
-	  function App() {
+	  function App(props) {
 	    _classCallCheck(this, App);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
 
 	    _this.state = {
 	      loggedIn: (0, _auth.loggedIn)()
 	    };
+
+	    // this.addStack.bind(this);
+
 	    return _this;
 	  }
 
 	  _createClass(App, [{
+	    key: 'addStack',
+	    value: function addStack(tag) {
+	      if (!this.props.searchValue) {
+	        this.props.setSearchValue(tag.value);
+	      } else {
+	        this.props.setSearchValue(this.props.searchValue + ', ' + tag.value);
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -47999,8 +48064,8 @@ module.exports =
 	              _react2.default.createElement(_login2.default, { loggedIn: this.state.loggedIn, userInfo: this.props.userInfo })
 	            ),
 	            _react2.default.createElement(_main2.default, null),
-	            _react2.default.createElement(_search2.default, { history: this.props.history }),
-	            _react2.default.createElement(_cloud2.default, null)
+	            _react2.default.createElement(_search2.default, { history: this.props.history, searchValue: this.props.searchValue }),
+	            _react2.default.createElement(_cloud2.default, { addStack: this.addStack.bind(this) })
 	          )
 	        ),
 	        _react2.default.createElement('div', { className: 'art' })
@@ -48017,12 +48082,13 @@ module.exports =
 
 	function mapStateToProps(state) {
 	  return {
-	    userInfo: state.userInfo
+	    userInfo: state.userInfo,
+	    searchValue: state.searchValue
 	  };
 	}
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ setUserInfo: _actionCreator.setUserInfo }, dispatch);
+	  return (0, _redux.bindActionCreators)({ setUserInfo: _actionCreator.setUserInfo, setSearchValue: _actionCreator.setSearchValue }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
@@ -48143,9 +48209,7 @@ module.exports =
 	        maxSize: 35,
 	        tags: this.state.stacks,
 	        className: 'stackCloud',
-	        onClick: function onClick(tag) {
-	          return console.log('clicking on tag:', tag);
-	        } });
+	        onClick: this.props.addStack });
 	    }
 	  }]);
 
