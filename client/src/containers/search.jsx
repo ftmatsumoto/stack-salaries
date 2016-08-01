@@ -92,7 +92,6 @@ class Search extends React.Component{
         console.log(err);
       }
     });
-
   }
 
   render() {

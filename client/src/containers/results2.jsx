@@ -12,30 +12,34 @@ import { setSearch } from '../actions/actionCreator';
 import search from '../containers/search';
 
 class Results2 extends React.Component {
-    constructor(props){
-      super(props);
-      this.state = {
-      }
-    }
-
-    render() {
-
-        return (
-          <div>
-            <div className="selection">
-              <h3 className="text-center">Test</h3>
-            </div>
-            <hr/>
-          </div>
-        );
-    }
-};
-
- function mapStateToProps(state) {
-    return {
-      salary: state.salary
+  constructor(props){
+    super(props);
+    this.state = {
+      width: 500,
+      height: 500
     }
   }
+
+
+  render() {
+    var graph;
+
+    return (
+      <div>
+        <div className="selection">
+          <h3 className="text-center">Test</h3>
+          {graph}
+        </div>
+      </div>
+    );
+  }
+};
+
+function mapStateToProps(state) {
+  return {
+    salary: state.salary
+  }
+}
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({setSearch: setSearch}, dispatch);

@@ -24,15 +24,19 @@ class Stats extends React.Component {
 
     this.state = {
       loggedIn: loggedIn(),
-      graph: true
+      graph: true,
+      data: []
     }
   }
 
   changeGraph() {
-    console.log(1111111111)
     this.setState({
       graph: !this.state.graph
     });
+  }
+
+  componentWillMount() {
+
   }
 
   render() {
@@ -47,7 +51,7 @@ class Stats extends React.Component {
               <Results history={this.props.history}/>
             </div>
             <div className="inner-search">
-              <button onClick={this.changeGraph.bind(this)}>Change</button>
+              <button className="btn btn-primary" onClick={this.changeGraph.bind(this)}>Change</button>
               <p className="lead text-center">Another Search?</p>
               <Search/>
             </div>
@@ -70,7 +74,7 @@ class Stats extends React.Component {
               <Results2 history={this.props.history}/>
             </div>
             <div className="inner-search">
-              <button onClick={this.changeGraph.bind(this)}>Change</button>
+              <button className="btn btn-primary" onClick={this.changeGraph.bind(this)}>Change</button>
               <p className="lead text-center">Another Search?</p>
               <Search/>
             </div>

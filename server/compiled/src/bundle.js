@@ -35177,7 +35177,8 @@ module.exports =
 
 	    _this.state = {
 	      loggedIn: (0, _auth.loggedIn)(),
-	      graph: true
+	      graph: true,
+	      data: []
 	    };
 	    return _this;
 	  }
@@ -35185,11 +35186,13 @@ module.exports =
 	  _createClass(Stats, [{
 	    key: 'changeGraph',
 	    value: function changeGraph() {
-	      console.log(1111111111);
 	      this.setState({
 	        graph: !this.state.graph
 	      });
 	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -35208,6 +35211,7 @@ module.exports =
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'd3' },
+	              console.log(this.props.history),
 	              _react2.default.createElement(_results2.default, { history: this.props.history })
 	            ),
 	            _react2.default.createElement(
@@ -35215,7 +35219,7 @@ module.exports =
 	              { className: 'inner-search' },
 	              _react2.default.createElement(
 	                'button',
-	                { onClick: this.changeGraph.bind(this) },
+	                { className: 'btn btn-primary', onClick: this.changeGraph.bind(this) },
 	                'Change'
 	              ),
 	              _react2.default.createElement(
@@ -35260,7 +35264,7 @@ module.exports =
 	              { className: 'inner-search' },
 	              _react2.default.createElement(
 	                'button',
-	                { onClick: this.changeGraph.bind(this) },
+	                { className: 'btn btn-primary', onClick: this.changeGraph.bind(this) },
 	                'Change'
 	              ),
 	              _react2.default.createElement(
@@ -47637,13 +47641,17 @@ module.exports =
 
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Results2).call(this, props));
 
-	    _this.state = {};
+	    _this.state = {
+	      width: 500,
+	      height: 500
+	    };
 	    return _this;
 	  }
 
 	  _createClass(Results2, [{
 	    key: 'render',
 	    value: function render() {
+	      var graph;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -47655,9 +47663,9 @@ module.exports =
 	            'h3',
 	            { className: 'text-center' },
 	            'Test'
-	          )
-	        ),
-	        _react2.default.createElement('hr', null)
+	          ),
+	          graph
+	        )
 	      );
 	    }
 	  }]);
