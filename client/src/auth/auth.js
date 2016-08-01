@@ -13,7 +13,6 @@ export function loggedIn(){
 // Deletes the localStorage token
 // New tokens are sent every time a user logs in
 export function logOut(){
-  delete window.sessionStorage.token;
   $.ajax({
     url: "/logout",
     type: "POST",
@@ -28,6 +27,7 @@ export function logOut(){
       console.error(err);
     }
   })
+  delete window.sessionStorage.token;
 }
 
 // Retrieves a given token from localStorage

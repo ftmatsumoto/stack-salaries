@@ -27144,7 +27144,6 @@
 	// Deletes the localStorage token
 	// New tokens are sent every time a user logs in
 	function logOut() {
-	  delete window.sessionStorage.token;
 	  _jquery2.default.ajax({
 	    url: "/logout",
 	    type: "POST",
@@ -27159,6 +27158,7 @@
 	      console.error(err);
 	    }
 	  });
+	  delete window.sessionStorage.token;
 	}
 
 	// Retrieves a given token from localStorage
@@ -50117,7 +50117,12 @@
 	      e.preventDefault();
 	      var self = this;
 
-	      var data = { name: this.state.name, email: this.state.email, password: this.state.password, gender: this.state.gender };
+	      var data = {
+	        name: this.state.name,
+	        email: this.state.email,
+	        password: this.state.password,
+	        gender: this.state.gender
+	      };
 
 	      _jquery2.default.ajax({
 	        url: "/signup",
@@ -50372,10 +50377,10 @@
 	var LoginForm = function (_React$Component) {
 	  _inherits(LoginForm, _React$Component);
 
-	  function LoginForm() {
+	  function LoginForm(props) {
 	    _classCallCheck(this, LoginForm);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LoginForm).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LoginForm).call(this, props));
 
 	    _this.state = {
 	      email: "",
@@ -50451,6 +50456,7 @@
 	        contentType: "application/json",
 	        data: JSON.stringify(data),
 	        success: function success(data) {
+	          console.log('SIGNIN AJAX ', data);
 	          window.sessionStorage.setItem('token', data.token), self.setState({
 	            authToken: data.token
 	          });

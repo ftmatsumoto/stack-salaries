@@ -18,9 +18,9 @@ import AdvancedSearch from '../containers/advanced-search';
 
 
 class LoginForm extends React.Component {
-  constructor() {
+  constructor(props) {
 
-    super();
+    super(props);
 
     this.state = {
       email: "",
@@ -90,6 +90,7 @@ class LoginForm extends React.Component {
       contentType:"application/json",
       data: JSON.stringify(data),
       success: function(data) {
+        console.log('SIGNIN AJAX ', data);
         window.sessionStorage.setItem('token', data.token),
         self.setState({
           authToken: data.token,
