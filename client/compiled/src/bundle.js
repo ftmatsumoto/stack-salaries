@@ -49373,8 +49373,7 @@
 	        position: this.state.position,
 	        salary: this.state.salary
 	      };
-
-	      this.props.setUserInfo(data);
+	      // this.props.setUserInfo(data);
 	    }
 	  }, {
 	    key: 'inputData',
