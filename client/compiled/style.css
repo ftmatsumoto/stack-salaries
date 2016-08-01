@@ -207,6 +207,7 @@ svg {
   background-color: transparent;
   margin-left: 10px;
   margin-top: 15px;
+  color: #1abc9c;
 }
 
 .right .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
