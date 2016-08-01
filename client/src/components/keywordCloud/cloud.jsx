@@ -18,11 +18,18 @@ const data = [
   { value: "Backbone", count: 10 }
 ];
 
-const Cloud = () => (
-  <TagCloud minSize={12}
+const renderer = defaultRenderer({
+  colorOptions: {
+    luminosity: 'light',
+    hue: 'green'
+  }
+});
+
+const Cloud = (props) => (
+  <TagCloud renderer={renderer}
+            minSize={12}
             maxSize={35}
             tags={data}
-            style={{width: 600}}
             className="stackCloud"
             onClick={tag => console.log('clicking on tag:', tag)} />
 );

@@ -48086,11 +48086,17 @@ module.exports =
 
 	var data = [{ value: "Angular", count: 38 }, { value: "React", count: 30 }, { value: "Nodejs", count: 28 }, { value: "Express.js", count: 25 }, { value: "HTML5", count: 33 }, { value: "CSS3", count: 33 }, { value: "MongoDB", count: 18 }, { value: "MEAN", count: 50 }, { value: "JavaScript", count: 70 }, { value: "PHP", count: 30 }, { value: "JQuery", count: 40 }, { value: "MERN", count: 20 }, { value: "Vue", count: 10 }, { value: "Backbone", count: 10 }];
 
-	var Cloud = function Cloud() {
-	  return _react2.default.createElement(_reactTagcloud.TagCloud, { minSize: 12,
+	var renderer = (0, _reactTagcloud.defaultRenderer)({
+	  colorOptions: {
+	    hue: 'green'
+	  }
+	});
+
+	var Cloud = function Cloud(props) {
+	  return _react2.default.createElement(_reactTagcloud.TagCloud, { renderer: renderer,
+	    minSize: 12,
 	    maxSize: 35,
 	    tags: data,
-	    style: { width: 600 },
 	    className: "stackCloud",
 	    onClick: function onClick(tag) {
 	      return console.log('clicking on tag:', tag);
