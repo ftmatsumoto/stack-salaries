@@ -35211,7 +35211,6 @@ module.exports =
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'd3' },
-	              console.log(this.props.history),
 	              _react2.default.createElement(_results2.default, { history: this.props.history })
 	            ),
 	            _react2.default.createElement(

@@ -37134,7 +37134,6 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'd3' },
-	              console.log(this.props.history),
 	              _react2.default.createElement(_results2.default, { history: this.props.history })
 	            ),
 	            _react2.default.createElement(
@@ -51081,7 +51080,7 @@
 
 	var _cityStateReducer2 = _interopRequireDefault(_cityStateReducer);
 
-	var _searchValueReducer = __webpack_require__(291);
+	var _searchValueReducer = __webpack_require__(292);
 
 	var _searchValueReducer2 = _interopRequireDefault(_searchValueReducer);
 
@@ -51147,7 +51146,7 @@
 	var _actionCreator = __webpack_require__(258);
 
 /***/ },
-/* 291 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
