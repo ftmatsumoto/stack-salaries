@@ -86,15 +86,15 @@ module.exports =
 
 	var _jobs2 = _interopRequireDefault(_jobs);
 
-	var _dashboard = __webpack_require__(268);
+	var _dashboard = __webpack_require__(275);
 
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 
-	var _signupForm = __webpack_require__(273);
+	var _signupForm = __webpack_require__(280);
 
 	var _signupForm2 = _interopRequireDefault(_signupForm);
 
-	var _loginForm = __webpack_require__(275);
+	var _loginForm = __webpack_require__(282);
 
 	var _loginForm2 = _interopRequireDefault(_loginForm);
 
@@ -48049,7 +48049,7 @@ module.exports =
 /* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -48059,20 +48059,858 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactTagcloud = __webpack_require__(268);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Cloud = _react2.default.createClass({
-	  displayName: 'Cloud',
+	var data = [{ value: "Angular", count: 38 }, { value: "React", count: 30 }, { value: "Nodejs", count: 28 }, { value: "Express.js", count: 25 }, { value: "HTML5", count: 33 }, { value: "CSS3", count: 33 }, { value: "MongoDB", count: 18 }, { value: "MEAN", count: 50 }, { value: "JavaScript", count: 70 }, { value: "PHP", count: 30 }, { value: "JQuery", count: 40 }, { value: "MERN", count: 20 }, { value: "Vue", count: 10 }, { value: "Backbone", count: 10 }];
 
-	  render: function render() {
-	    return _react2.default.createElement('div', null);
-	  }
-	});
+	var Cloud = function Cloud() {
+	  return _react2.default.createElement(_reactTagcloud.TagCloud, { minSize: 12,
+	    maxSize: 35,
+	    tags: data,
+	    style: { width: 600 },
+	    className: "stackCloud",
+	    onClick: function onClick(tag) {
+	      return console.log('clicking on tag:', tag);
+	    } });
+	};
 
 	exports.default = Cloud;
 
 /***/ },
 /* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.defaultRenderer = exports.DefaultRenderer = exports.TagCloud = undefined;
+
+	var _TagCloud = __webpack_require__(269);
+
+	Object.defineProperty(exports, 'TagCloud', {
+	  enumerable: true,
+	  get: function get() {
+	    return _TagCloud.TagCloud;
+	  }
+	});
+
+	var _defaultRenderer = __webpack_require__(270);
+
+	var deprecatedRendererExport = function deprecatedRendererExport() {
+	  // eslint-disable-next-line no-console
+	  console.warn('Using deprecated \'DefaultRenderer\' import, it will be removed in the next major release and replaced with \'defaultRenderer\'.');
+	  return _defaultRenderer.defaultRenderer.apply(undefined, arguments);
+	};
+
+	exports.DefaultRenderer = deprecatedRendererExport;
+	exports.defaultRenderer = _defaultRenderer.defaultRenderer;
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.TagCloud = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _defaultRenderer = __webpack_require__(270);
+
+	var _arrayShuffle = __webpack_require__(273);
+
+	var _arrayShuffle2 = _interopRequireDefault(_arrayShuffle);
+
+	var _helpers = __webpack_require__(274);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var eventHandlers = ['onClick', 'onDoubleClick', 'onMouseMove'];
+	var cloudProps = ['tags', 'shuffle', 'renderer', 'maxSize', 'minSize'];
+
+	var TagCloud = exports.TagCloud = function (_React$Component) {
+	  _inherits(TagCloud, _React$Component);
+
+	  function TagCloud() {
+	    _classCallCheck(this, TagCloud);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TagCloud).apply(this, arguments));
+	  }
+
+	  _createClass(TagCloud, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(_ref) {
+	      var shuffle = _ref.shuffle;
+	      var tags = _ref.tags;
+
+	      if (!shuffle) {
+	        this._tags = tags;
+	        return;
+	      }
+	      if (shuffle && shuffle !== this.props.shuffle) {
+	        this._tags = (0, _arrayShuffle2.default)(tags);
+	        return;
+	      }
+	      if (shuffle && !(0, _helpers.arraysEqual)(tags, this.props.tags)) {
+	        this._tags = (0, _arrayShuffle2.default)(tags);
+	      }
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _props = this.props;
+	      var tags = _props.tags;
+	      var shuffle = _props.shuffle;
+
+	      this._tags = shuffle ? (0, _arrayShuffle2.default)(tags) : tags;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var props = (0, _helpers.omitProps)(this.props, [].concat(cloudProps, eventHandlers));
+	      return _react2.default.createElement(
+	        'div',
+	        props,
+	        this._createTags()
+	      );
+	    }
+	  }, {
+	    key: '_createTags',
+	    value: function _createTags() {
+	      var _props2 = this.props;
+	      var minSize = _props2.minSize;
+	      var maxSize = _props2.maxSize;
+	      var renderer = _props2.renderer;
+
+	      var handlers = (0, _helpers.includeProps)(this.props, eventHandlers);
+	      var counts = this._tags.map(function (tag) {
+	        return tag.count;
+	      }),
+	          min = Math.min.apply(Math, _toConsumableArray(counts)),
+	          max = Math.max.apply(Math, _toConsumableArray(counts));
+	      return this._tags.map(function (tag) {
+	        var fontSize = (0, _helpers.fontSizeConverter)(tag.count, min, max, minSize, maxSize);
+	        return renderer(tag, fontSize, handlers);
+	      });
+	    }
+	  }]);
+
+	  return TagCloud;
+	}(_react2.default.Component);
+
+	TagCloud.propTypes = {
+	  tags: _react2.default.PropTypes.array.isRequired,
+	  maxSize: _react2.default.PropTypes.number.isRequired,
+	  minSize: _react2.default.PropTypes.number.isRequired,
+	  shuffle: _react2.default.PropTypes.bool,
+	  renderer: _react2.default.PropTypes.func,
+	  className: _react2.default.PropTypes.string
+	};
+
+	TagCloud.defaultProps = {
+	  renderer: (0, _defaultRenderer.defaultRenderer)(),
+	  shuffle: true,
+	  className: 'tag-cloud'
+	};
+
+/***/ },
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.defaultRenderer = undefined;
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _randomcolor = __webpack_require__(271);
+
+	var _randomcolor2 = _interopRequireDefault(_randomcolor);
+
+	var _objectAssign = __webpack_require__(272);
+
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var defaultRenderer = exports.defaultRenderer = function defaultRenderer() {
+	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  return function (tag, size) {
+	    var handlers = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	    var _options$tagRenderer = options.tagRenderer;
+	    var tagRenderer = _options$tagRenderer === undefined ? function (tag) {
+	      return tag.value;
+	    } : _options$tagRenderer;
+	    var _options$colorOptions = options.colorOptions;
+	    var colorOptions = _options$colorOptions === undefined ? {} : _options$colorOptions;
+	    var _options$disableRando = options.disableRandomColor;
+	    var disableRandomColor = _options$disableRando === undefined ? false : _options$disableRando;
+	    var _options$props = options.props;
+	    var props = _options$props === undefined ? {} : _options$props;
+
+
+	    if (props.disableRandomColor) {
+	      // eslint-disable-next-line no-console
+	      console.warn("Using deprecated property 'disableRandomColor' passed to prop option of defaultRenderer. " + "It will be removed in the next major release and replaced with it's own option 'disableRandomColor'.");
+	    }
+
+	    var className = 'tag-cloud-tag';
+	    var fontSize = size + 'px';
+	    var color = props.disableRandomColor || disableRandomColor ? tag.color || undefined : (0, _randomcolor2.default)(colorOptions);
+	    var key = tag.key || tag.value;
+	    var style = (0, _objectAssign2.default)({}, styles, { color: color }, props.style, { fontSize: fontSize });
+
+	    var eventHandlers = {};
+	    Object.keys(handlers).forEach(function (key) {
+	      return handlers[key] && (eventHandlers[key] = function (e) {
+	        return handlers[key](tag, e);
+	      });
+	    });
+
+	    var elementProps = (0, _objectAssign2.default)({}, { className: className }, eventHandlers, props, { style: style }, { key: key });
+
+	    return _react2.default.createElement(
+	      'span',
+	      elementProps,
+	      tagRenderer(tag)
+	    );
+	  };
+	};
+
+	var styles = {
+	  margin: '0px 3px',
+	  verticalAlign: 'middle',
+	  display: 'inline-block'
+	};
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// randomColor by David Merfield under the CC0 license
+	// https://github.com/davidmerfield/randomColor/
+
+	;(function(root, factory) {
+
+	  // Support AMD
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+	  // Support CommonJS
+	  } else if (typeof exports === 'object') {
+	    var randomColor = factory();
+
+	    // Support NodeJS & Component, which allow module.exports to be a function
+	    if (typeof module === 'object' && module && module.exports) {
+	      exports = module.exports = randomColor;
+	    }
+
+	    // Support CommonJS 1.1.1 spec
+	    exports.randomColor = randomColor;
+
+	  // Support vanilla script loading
+	  } else {
+	    root.randomColor = factory();
+	  }
+
+	}(this, function() {
+
+	  // Seed to get repeatable colors
+	  var seed = null;
+
+	  // Shared color dictionary
+	  var colorDictionary = {};
+
+	  // Populate the color dictionary
+	  loadColorBounds();
+
+	  var randomColor = function (options) {
+
+	    options = options || {};
+
+	    // Check if there is a seed and ensure it's an
+	    // integer. Otherwise, reset the seed value.
+	    if (options.seed && options.seed === parseInt(options.seed, 10)) {
+	      seed = options.seed;
+
+	    // A string was passed as a seed
+	    } else if (typeof options.seed === 'string') {
+	      seed = stringToInteger(options.seed);
+
+	    // Something was passed as a seed but it wasn't an integer or string
+	    } else if (options.seed !== undefined && options.seed !== null) {
+	      throw new TypeError('The seed value must be an integer or string');
+
+	    // No seed, reset the value outside.
+	    } else {
+	      seed = null;
+	    }
+
+	    var H,S,B;
+
+	    // Check if we need to generate multiple colors
+	    if (options.count !== null && options.count !== undefined) {
+
+	      var totalColors = options.count,
+	          colors = [];
+
+	      options.count = null;
+
+	      while (totalColors > colors.length) {
+
+	        // Since we're generating multiple colors,
+	        // incremement the seed. Otherwise we'd just
+	        // generate the same color each time...
+	        if (seed && options.seed) options.seed += 1;
+
+	        colors.push(randomColor(options));
+	      }
+
+	      options.count = totalColors;
+
+	      return colors;
+	    }
+
+	    // First we pick a hue (H)
+	    H = pickHue(options);
+
+	    // Then use H to determine saturation (S)
+	    S = pickSaturation(H, options);
+
+	    // Then use S and H to determine brightness (B).
+	    B = pickBrightness(H, S, options);
+
+	    // Then we return the HSB color in the desired format
+	    return setFormat([H,S,B], options);
+	  };
+
+	  function pickHue (options) {
+
+	    var hueRange = getHueRange(options.hue),
+	        hue = randomWithin(hueRange);
+
+	    // Instead of storing red as two seperate ranges,
+	    // we group them, using negative numbers
+	    if (hue < 0) {hue = 360 + hue;}
+
+	    return hue;
+
+	  }
+
+	  function pickSaturation (hue, options) {
+
+	    if (options.luminosity === 'random') {
+	      return randomWithin([0,100]);
+	    }
+
+	    if (options.hue === 'monochrome') {
+	      return 0;
+	    }
+
+	    var saturationRange = getSaturationRange(hue);
+
+	    var sMin = saturationRange[0],
+	        sMax = saturationRange[1];
+
+	    switch (options.luminosity) {
+
+	      case 'bright':
+	        sMin = 55;
+	        break;
+
+	      case 'dark':
+	        sMin = sMax - 10;
+	        break;
+
+	      case 'light':
+	        sMax = 55;
+	        break;
+	   }
+
+	    return randomWithin([sMin, sMax]);
+
+	  }
+
+	  function pickBrightness (H, S, options) {
+
+	    var bMin = getMinimumBrightness(H, S),
+	        bMax = 100;
+
+	    switch (options.luminosity) {
+
+	      case 'dark':
+	        bMax = bMin + 20;
+	        break;
+
+	      case 'light':
+	        bMin = (bMax + bMin)/2;
+	        break;
+
+	      case 'random':
+	        bMin = 0;
+	        bMax = 100;
+	        break;
+	    }
+
+	    return randomWithin([bMin, bMax]);
+	  }
+
+	  function setFormat (hsv, options) {
+
+	    switch (options.format) {
+
+	      case 'hsvArray':
+	        return hsv;
+
+	      case 'hslArray':
+	        return HSVtoHSL(hsv);
+
+	      case 'hsl':
+	        var hsl = HSVtoHSL(hsv);
+	        return 'hsl('+hsl[0]+', '+hsl[1]+'%, '+hsl[2]+'%)';
+
+	      case 'hsla':
+	        var hslColor = HSVtoHSL(hsv);
+	        return 'hsla('+hslColor[0]+', '+hslColor[1]+'%, '+hslColor[2]+'%, ' + Math.random() + ')';
+
+	      case 'rgbArray':
+	        return HSVtoRGB(hsv);
+
+	      case 'rgb':
+	        var rgb = HSVtoRGB(hsv);
+	        return 'rgb(' + rgb.join(', ') + ')';
+
+	      case 'rgba':
+	        var rgbColor = HSVtoRGB(hsv);
+	        return 'rgba(' + rgbColor.join(', ') + ', ' + Math.random() + ')';
+
+	      default:
+	        return HSVtoHex(hsv);
+	    }
+
+	  }
+
+	  function getMinimumBrightness(H, S) {
+
+	    var lowerBounds = getColorInfo(H).lowerBounds;
+
+	    for (var i = 0; i < lowerBounds.length - 1; i++) {
+
+	      var s1 = lowerBounds[i][0],
+	          v1 = lowerBounds[i][1];
+
+	      var s2 = lowerBounds[i+1][0],
+	          v2 = lowerBounds[i+1][1];
+
+	      if (S >= s1 && S <= s2) {
+
+	         var m = (v2 - v1)/(s2 - s1),
+	             b = v1 - m*s1;
+
+	         return m*S + b;
+	      }
+
+	    }
+
+	    return 0;
+	  }
+
+	  function getHueRange (colorInput) {
+
+	    if (typeof parseInt(colorInput) === 'number') {
+
+	      var number = parseInt(colorInput);
+
+	      if (number < 360 && number > 0) {
+	        return [number, number];
+	      }
+
+	    }
+
+	    if (typeof colorInput === 'string') {
+
+	      if (colorDictionary[colorInput]) {
+	        var color = colorDictionary[colorInput];
+	        if (color.hueRange) {return color.hueRange;}
+	      }
+	    }
+
+	    return [0,360];
+
+	  }
+
+	  function getSaturationRange (hue) {
+	    return getColorInfo(hue).saturationRange;
+	  }
+
+	  function getColorInfo (hue) {
+
+	    // Maps red colors to make picking hue easier
+	    if (hue >= 334 && hue <= 360) {
+	      hue-= 360;
+	    }
+
+	    for (var colorName in colorDictionary) {
+	       var color = colorDictionary[colorName];
+	       if (color.hueRange &&
+	           hue >= color.hueRange[0] &&
+	           hue <= color.hueRange[1]) {
+	          return colorDictionary[colorName];
+	       }
+	    } return 'Color not found';
+	  }
+
+	  function randomWithin (range) {
+	    if (seed === null) {
+	      return Math.floor(range[0] + Math.random()*(range[1] + 1 - range[0]));
+	    } else {
+	      //Seeded random algorithm from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+	      var max = range[1] || 1;
+	      var min = range[0] || 0;
+	      seed = (seed * 9301 + 49297) % 233280;
+	      var rnd = seed / 233280.0;
+	      return Math.floor(min + rnd * (max - min));
+	    }
+	  }
+
+	  function HSVtoHex (hsv){
+
+	    var rgb = HSVtoRGB(hsv);
+
+	    function componentToHex(c) {
+	        var hex = c.toString(16);
+	        return hex.length == 1 ? '0' + hex : hex;
+	    }
+
+	    var hex = '#' + componentToHex(rgb[0]) + componentToHex(rgb[1]) + componentToHex(rgb[2]);
+
+	    return hex;
+
+	  }
+
+	  function defineColor (name, hueRange, lowerBounds) {
+
+	    var sMin = lowerBounds[0][0],
+	        sMax = lowerBounds[lowerBounds.length - 1][0],
+
+	        bMin = lowerBounds[lowerBounds.length - 1][1],
+	        bMax = lowerBounds[0][1];
+
+	    colorDictionary[name] = {
+	      hueRange: hueRange,
+	      lowerBounds: lowerBounds,
+	      saturationRange: [sMin, sMax],
+	      brightnessRange: [bMin, bMax]
+	    };
+
+	  }
+
+	  function loadColorBounds () {
+
+	    defineColor(
+	      'monochrome',
+	      null,
+	      [[0,0],[100,0]]
+	    );
+
+	    defineColor(
+	      'red',
+	      [-26,18],
+	      [[20,100],[30,92],[40,89],[50,85],[60,78],[70,70],[80,60],[90,55],[100,50]]
+	    );
+
+	    defineColor(
+	      'orange',
+	      [19,46],
+	      [[20,100],[30,93],[40,88],[50,86],[60,85],[70,70],[100,70]]
+	    );
+
+	    defineColor(
+	      'yellow',
+	      [47,62],
+	      [[25,100],[40,94],[50,89],[60,86],[70,84],[80,82],[90,80],[100,75]]
+	    );
+
+	    defineColor(
+	      'green',
+	      [63,178],
+	      [[30,100],[40,90],[50,85],[60,81],[70,74],[80,64],[90,50],[100,40]]
+	    );
+
+	    defineColor(
+	      'blue',
+	      [179, 257],
+	      [[20,100],[30,86],[40,80],[50,74],[60,60],[70,52],[80,44],[90,39],[100,35]]
+	    );
+
+	    defineColor(
+	      'purple',
+	      [258, 282],
+	      [[20,100],[30,87],[40,79],[50,70],[60,65],[70,59],[80,52],[90,45],[100,42]]
+	    );
+
+	    defineColor(
+	      'pink',
+	      [283, 334],
+	      [[20,100],[30,90],[40,86],[60,84],[80,80],[90,75],[100,73]]
+	    );
+
+	  }
+
+	  function HSVtoRGB (hsv) {
+
+	    // this doesn't work for the values of 0 and 360
+	    // here's the hacky fix
+	    var h = hsv[0];
+	    if (h === 0) {h = 1;}
+	    if (h === 360) {h = 359;}
+
+	    // Rebase the h,s,v values
+	    h = h/360;
+	    var s = hsv[1]/100,
+	        v = hsv[2]/100;
+
+	    var h_i = Math.floor(h*6),
+	      f = h * 6 - h_i,
+	      p = v * (1 - s),
+	      q = v * (1 - f*s),
+	      t = v * (1 - (1 - f)*s),
+	      r = 256,
+	      g = 256,
+	      b = 256;
+
+	    switch(h_i) {
+	      case 0: r = v; g = t; b = p;  break;
+	      case 1: r = q; g = v; b = p;  break;
+	      case 2: r = p; g = v; b = t;  break;
+	      case 3: r = p; g = q; b = v;  break;
+	      case 4: r = t; g = p; b = v;  break;
+	      case 5: r = v; g = p; b = q;  break;
+	    }
+
+	    var result = [Math.floor(r*255), Math.floor(g*255), Math.floor(b*255)];
+	    return result;
+	  }
+
+	  function HSVtoHSL (hsv) {
+	    var h = hsv[0],
+	      s = hsv[1]/100,
+	      v = hsv[2]/100,
+	      k = (2-s)*v;
+
+	    return [
+	      h,
+	      Math.round(s*v / (k<1 ? k : 2-k) * 10000) / 100,
+	      k/2 * 100
+	    ];
+	  }
+
+	  function stringToInteger (string) {
+	    var total = 0
+	    for (var i = 0; i !== string.length; i++) {
+	      if (total >= Number.MAX_SAFE_INTEGER) break;
+	      total += string.charCodeAt(i)
+	    }
+	    return total
+	  }
+
+	  return randomColor;
+	}));
+
+
+/***/ },
+/* 272 */
+/***/ function(module, exports) {
+
+	'use strict';
+	/* eslint-disable no-unused-vars */
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	function shouldUseNative() {
+		try {
+			if (!Object.assign) {
+				return false;
+			}
+
+			// Detect buggy property enumeration order in older V8 versions.
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+			var test1 = new String('abc');  // eslint-disable-line
+			test1[5] = 'de';
+			if (Object.getOwnPropertyNames(test1)[0] === '5') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test2 = {};
+			for (var i = 0; i < 10; i++) {
+				test2['_' + String.fromCharCode(i)] = i;
+			}
+			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+				return test2[n];
+			});
+			if (order2.join('') !== '0123456789') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test3 = {};
+			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+				test3[letter] = letter;
+			});
+			if (Object.keys(Object.assign({}, test3)).join('') !==
+					'abcdefghijklmnopqrst') {
+				return false;
+			}
+
+			return true;
+		} catch (e) {
+			// We don't expect any of the above to throw, but better to be safe.
+			return false;
+		}
+	}
+
+	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+
+			if (Object.getOwnPropertySymbols) {
+				symbols = Object.getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+
+		return to;
+	};
+
+
+/***/ },
+/* 273 */
+/***/ function(module, exports) {
+
+	'use strict';
+	module.exports = function (arr) {
+		if (!Array.isArray(arr)) {
+			throw new TypeError('Expected Array, got ' + typeof arr);
+		}
+
+		var rand;
+		var tmp;
+		var len = arr.length;
+		var ret = arr.slice();
+
+		while (len) {
+			rand = Math.floor(Math.random() * len--);
+			tmp = ret[len];
+			ret[len] = ret[rand];
+			ret[rand] = tmp;
+		}
+
+		return ret;
+	};
+
+
+/***/ },
+/* 274 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * Creates new object from target excluding given properties.
+	 */
+	var omitProps = exports.omitProps = function omitProps(target, props) {
+	  return Object.keys(target).reduce(function (r, key) {
+	    if (! ~props.indexOf(key)) {
+	      r[key] = target[key];
+	    }
+	    return r;
+	  }, {});
+	};
+
+	/**
+	 * Creates new object from target including all available properties.
+	 */
+	var includeProps = exports.includeProps = function includeProps(target, props) {
+	  return Object.keys(target).reduce(function (r, key) {
+	    if (~props.indexOf(key) && key in target) {
+	      r[key] = target[key];
+	    }
+	    return r;
+	  }, {});
+	};
+
+	/**
+	 * Computes appropriate font size of tag.
+	 */
+	var fontSizeConverter = exports.fontSizeConverter = function fontSizeConverter(count, min, max, minSize, maxSize) {
+	  return Math.round((count - min) * (maxSize - minSize) / (max - min) + minSize);
+	};
+
+	/**
+	 * Returns true if arrays contains the same elements.
+	 */
+	var arraysEqual = exports.arraysEqual = function arraysEqual(arr1, arr2) {
+	  if (arr1.length !== arr2.length) {
+	    return false;
+	  }
+	  return arr1.every(function (o, i) {
+	    return o === arr2[i];
+	  });
+	};
+
+/***/ },
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48097,7 +48935,7 @@ module.exports =
 
 	var _redux = __webpack_require__(236);
 
-	var _reactUseravatar = __webpack_require__(269);
+	var _reactUseravatar = __webpack_require__(276);
 
 	var _reactUseravatar2 = _interopRequireDefault(_reactUseravatar);
 
@@ -48105,11 +48943,11 @@ module.exports =
 
 	var _auth = __webpack_require__(221);
 
-	var _flash = __webpack_require__(271);
+	var _flash = __webpack_require__(278);
 
 	var _flash2 = _interopRequireDefault(_flash);
 
-	var _dashboardDataInput = __webpack_require__(272);
+	var _dashboardDataInput = __webpack_require__(279);
 
 	var _dashboardDataInput2 = _interopRequireDefault(_dashboardDataInput);
 
@@ -48404,7 +49242,7 @@ module.exports =
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 /***/ },
-/* 269 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -48412,12 +49250,12 @@ module.exports =
 	 * Links : https://github.com/bltnico
 	 */
 
-	var UserAvatar = __webpack_require__(270);
+	var UserAvatar = __webpack_require__(277);
 	module.exports = UserAvatar;
 
 
 /***/ },
-/* 270 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48634,7 +49472,7 @@ module.exports =
 	};
 
 /***/ },
-/* 271 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -48692,7 +49530,7 @@ module.exports =
 	exports.default = Flash;
 
 /***/ },
-/* 272 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48839,7 +49677,7 @@ module.exports =
 	exports.default = DataInput;
 
 /***/ },
-/* 273 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48866,7 +49704,7 @@ module.exports =
 
 	var _actionCreator = __webpack_require__(255);
 
-	var _signupInput = __webpack_require__(274);
+	var _signupInput = __webpack_require__(281);
 
 	var _signupInput2 = _interopRequireDefault(_signupInput);
 
@@ -48994,7 +49832,7 @@ module.exports =
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SignForm);
 
 /***/ },
-/* 274 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49136,7 +49974,7 @@ module.exports =
 	exports.default = SignupInput;
 
 /***/ },
-/* 275 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49163,11 +50001,11 @@ module.exports =
 
 	var _actionCreator = __webpack_require__(255);
 
-	var _flash = __webpack_require__(271);
+	var _flash = __webpack_require__(278);
 
 	var _flash2 = _interopRequireDefault(_flash);
 
-	var _loginInput = __webpack_require__(276);
+	var _loginInput = __webpack_require__(283);
 
 	var _loginInput2 = _interopRequireDefault(_loginInput);
 
@@ -49327,7 +50165,7 @@ module.exports =
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginForm);
 
 /***/ },
-/* 276 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
