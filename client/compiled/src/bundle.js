@@ -37374,9 +37374,9 @@
 	            'li',
 	            null,
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/' },
-	              'Team Onix'
+	              'a',
+	              { href: 'https://github.com/HRR17-Jigglypuff' },
+	              'Team Jigglypuff'
 	            )
 	          ),
 	          _react2.default.createElement(
