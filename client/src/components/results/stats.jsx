@@ -30,6 +30,7 @@ class Stats extends React.Component {
   }
 
   changeGraph() {
+    console.log(1111111111111)
     this.setState({
       graph: !this.state.graph
     });

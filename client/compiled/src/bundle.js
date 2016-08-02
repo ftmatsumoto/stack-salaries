@@ -37109,6 +37109,7 @@
 	  _createClass(Stats, [{
 	    key: 'changeGraph',
 	    value: function changeGraph() {
+	      console.log(1111111111111);
 	      this.setState({
 	        graph: !this.state.graph
 	      });
@@ -47940,7 +47941,6 @@
 	  _createClass(Results2, [{
 	    key: 'render',
 	    value: function render() {
-	      var graph;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -47953,7 +47953,7 @@
 	            { className: 'text-center' },
 	            'Test'
 	          ),
-	          graph
+	          console.log(this.props.salary)
 	        )
 	      );
 	    }

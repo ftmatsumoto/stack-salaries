@@ -20,15 +20,14 @@ class Results2 extends React.Component {
     }
   }
 
-
   render() {
-    var graph;
+
 
     return (
       <div>
         <div className="selection">
           <h3 className="text-center">Test</h3>
-          {graph}
+          {console.log(this.props.salary)}
         </div>
       </div>
     );

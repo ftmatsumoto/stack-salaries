@@ -35186,6 +35186,7 @@ module.exports =
 	  _createClass(Stats, [{
 	    key: 'changeGraph',
 	    value: function changeGraph() {
+	      console.log(1111111111111);
 	      this.setState({
 	        graph: !this.state.graph
 	      });
@@ -47650,7 +47651,6 @@ module.exports =
 	  _createClass(Results2, [{
 	    key: 'render',
 	    value: function render() {
-	      var graph;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -47663,7 +47663,7 @@ module.exports =
 	            { className: 'text-center' },
 	            'Test'
 	          ),
-	          graph
+	          console.log(this.props.salary)
 	        )
 	      );
 	    }
