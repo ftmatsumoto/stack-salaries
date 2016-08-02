@@ -94,16 +94,24 @@ var DataInput = (props) => (
 
       <fieldset className="form-group row gray">
         <div className="col-sm-1">
-            <span className="glyphicon glyphicon-education"></span>
+          <span className="glyphicon glyphicon-education"></span>
         </div>
         <div className="col-sm-11">
-          <input
-            type="text"
-            value={props.education}
-            className="form-control"
-            onChange={props.addEducation}
-            placeholder="Add your education level"
-          />
+          <select
+          className="center-block form-control fit"
+          value={props.education}
+          onChange={props.addEducation}
+          >
+            <option disabled selected>Add your education</option>
+            <option value='High School'>High School</option>
+            <option value='Some College'>Some College</option>
+            <option value='AA'>AA</option>
+            <option value='BA'>BA</option>
+            <option value='BS'>BS</option>
+            <option value='MA'>MA</option>
+            <option value='MS'>MS</option>
+            <option value='PhD'>PhD</option>
+          </select>
         </div>
       </fieldset>
 
