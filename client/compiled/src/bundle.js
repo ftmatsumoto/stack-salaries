@@ -37374,9 +37374,9 @@
 	            'li',
 	            null,
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/' },
-	              'Team Onix'
+	              'a',
+	              { href: 'https://github.com/HRR17-Jigglypuff' },
+	              'Team Jigglypuff'
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -37795,7 +37795,10 @@
 	  }, {
 	    key: 'findStack',
 	    value: function findStack(e) {
-	      var newStack = this.props.searchValue + e.target.value;
+	      var newStack = e.target.value;
+	      if (this.props.searchValue) {
+	        newStack = e.target.value;
+	      }
 	      this.props.setSearchValue(newStack);
 	      this.setState({
 	        stack: e.target.value.toLowerCase().split(', ')
@@ -37876,7 +37879,7 @@
 	}
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ setSearch: _actionCreator.setSearch, setCityState: _actionCreator.setCityState }, dispatch);
+	  return (0, _redux.bindActionCreators)({ setSearch: _actionCreator.setSearch, setCityState: _actionCreator.setCityState, setSearchValue: _actionCreator.setSearchValue }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Search);
