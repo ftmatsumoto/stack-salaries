@@ -122,7 +122,7 @@ var DataInput = (props) => (
         </div>
         <div className="col-sm-11">
           <input
-            type="text"
+            type="number"
             value={props.experience}
             className="form-control"
             onChange={props.addExperience}
@@ -152,7 +152,7 @@ var DataInput = (props) => (
         </div>
         <div className="col-sm-11">
           <input
-            type="text"
+            type="number"
             value={props.salary}
             className="form-control"
             onChange={props.addSalary}
