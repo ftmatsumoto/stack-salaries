@@ -32,6 +32,8 @@ var AdvancedSearchInput = (props) => (
             value={props.state}
             className="form-control"
             onChange={props.findState}
+            name="state"
+            maxlength="2"
             placeholder="Add your desired state"
           />
         </div>
@@ -39,16 +41,49 @@ var AdvancedSearchInput = (props) => (
 
       <fieldset className="form-group row gray">
         <div className="col-sm-1">
+          <span className="glyphicon glyphicon-globe"></span>
+        </div>
+        <div className="col-sm-11">
+          <select
+          className="center-block form-control fit"
+          value={props.state}
+          onChange={props.findState}
+          >
+            <option disabled selected>Add your desired state</option>
+            <option value='High School'>High School</option>
+            <option value='Some College'>Some College</option>
+            <option value='AA'>AA</option>
+            <option value='BA'>BA</option>
+            <option value='BS'>BS</option>
+            <option value='MA'>MA</option>
+            <option value='MS'>MS</option>
+            <option value='PhD'>PhD</option>
+          </select>
+        </div>
+      </fieldset>
+
+
+
+      <fieldset className="form-group row gray">
+        <div className="col-sm-1">
           <span className="glyphicon glyphicon-education"></span>
         </div>
         <div className="col-sm-11">
-          <input
-            type="text"
-            value={props.education}
-            className="form-control"
-            onChange={props.findEducation}
-            placeholder="Education Level"
-          />
+          <select
+          className="center-block form-control fit"
+          value={props.education}
+          onChange={props.findEducation}
+          >
+            <option disabled selected>Add your education</option>
+            <option value='High School'>High School</option>
+            <option value='Some College'>Some College</option>
+            <option value='AA'>AA</option>
+            <option value='BA'>BA</option>
+            <option value='BS'>BS</option>
+            <option value='MA'>MA</option>
+            <option value='MS'>MS</option>
+            <option value='PhD'>PhD</option>
+          </select>
         </div>
       </fieldset>
 
@@ -57,13 +92,16 @@ var AdvancedSearchInput = (props) => (
           <span className="glyphicon glyphicon-user"></span>
         </div>
         <div className="col-sm-11">
-          <input
-            type="text"
-            value={props.gender}
-            className="form-control"
-            onChange={props.findGender}
-            placeholder="Gender"
-          />
+          <select
+          className="center-block form-control fit"
+          value={props.gender}
+          onChange={props.addGender}
+          >
+            <option disabled selected>Add your gender</option>
+            <option value='Male'>Male</option>
+            <option value='Female'>Female</option>
+            <option value='Other'>Other</option>
+          </select>
         </div>
       </fieldset>
 

@@ -48098,6 +48098,8 @@
 	            value: props.state,
 	            className: 'form-control',
 	            onChange: props.findState,
+	            name: 'state',
+	            maxlength: '2',
 	            placeholder: 'Add your desired state'
 	          })
 	        )
@@ -48113,13 +48115,59 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-11' },
-	          _react2.default.createElement('input', {
-	            type: 'text',
-	            value: props.education,
-	            className: 'form-control',
-	            onChange: props.findEducation,
-	            placeholder: 'Education Level'
-	          })
+	          _react2.default.createElement(
+	            'select',
+	            {
+	              className: 'center-block form-control fit',
+	              value: props.education,
+	              onChange: props.findEducation
+	            },
+	            _react2.default.createElement(
+	              'option',
+	              { disabled: true, selected: true },
+	              'Education'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'High School' },
+	              'High School'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'Some College' },
+	              'Some College'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'AA' },
+	              'AA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'BA' },
+	              'BA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'BS' },
+	              'BS'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MA' },
+	              'MA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MS' },
+	              'MS'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'PhD' },
+	              'PhD'
+	            )
+	          )
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -48133,13 +48181,34 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-11' },
-	          _react2.default.createElement('input', {
-	            type: 'text',
-	            value: props.gender,
-	            className: 'form-control',
-	            onChange: props.findGender,
-	            placeholder: 'Gender'
-	          })
+	          _react2.default.createElement(
+	            'select',
+	            {
+	              className: 'center-block form-control fit',
+	              value: props.gender,
+	              onChange: props.addGender
+	            },
+	            _react2.default.createElement(
+	              'option',
+	              { disabled: true, selected: true },
+	              'Gender'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'Male' },
+	              'Male'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'Female' },
+	              'Female'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'Other' },
+	              'Other'
+	            )
+	          )
 	        )
 	      ),
 	      _react2.default.createElement(
