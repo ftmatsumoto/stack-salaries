@@ -21,7 +21,6 @@ var AdvancedSearchInput = (props) => (
         </div>
       </fieldset>
 
-
       <fieldset className="form-group row gray">
         <div className="col-sm-1">
           <span className="glyphicon glyphicon-globe"></span>
@@ -151,7 +150,7 @@ var AdvancedSearchInput = (props) => (
         </div>
         <div className="col-sm-11">
           <input
-            type="text"
+            type="number"
             value={props.experience}
             className="form-control"
             onChange={props.findExperience}
