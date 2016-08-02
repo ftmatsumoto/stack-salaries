@@ -26,23 +26,6 @@ var AdvancedSearchInput = (props) => (
           <span className="glyphicon glyphicon-globe"></span>
         </div>
         <div className="col-sm-11">
-          <input
-            type="text"
-            value={props.state}
-            className="form-control"
-            onChange={props.findState}
-            name="state"
-            maxlength="2"
-            placeholder="Add your desired state"
-          />
-        </div>
-      </fieldset>
-
-      <fieldset className="form-group row gray">
-        <div className="col-sm-1">
-          <span className="glyphicon glyphicon-globe"></span>
-        </div>
-        <div className="col-sm-11">
           <select
           className="center-block form-control fit"
           value={props.state}
@@ -134,7 +117,7 @@ var AdvancedSearchInput = (props) => (
           <select
           className="center-block form-control fit"
           value={props.gender}
-          onChange={props.addGender}
+          onChange={props.findGender}
           >
             <option disabled selected>Add your gender</option>
             <option value='Male'>Male</option>
