@@ -514,3 +514,21 @@ svg {
   cursor: pointer;
 }
 
+.salaries {
+  width: 100%
+  padding-top: 75px;
+  font-family: monospace;
+}
+
+.salaryTable {
+  width: 100%;
+  margin: auto;
+}
+
+.salaryTable td, .salaryTable th {
+  padding: 5px;
+}
+
+.salaryTable th {
+  text-align: center;
+}
