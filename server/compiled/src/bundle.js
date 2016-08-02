@@ -47971,15 +47971,269 @@ module.exports =
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-11' },
-	          _react2.default.createElement('input', {
-	            type: 'text',
-	            value: props.state,
-	            className: 'form-control',
-	            onChange: props.findState,
-	            name: 'state',
-	            maxlength: '2',
-	            placeholder: 'Add your desired state'
-	          })
+	          _react2.default.createElement(
+	            'select',
+	            {
+	              className: 'center-block form-control fit',
+	              value: props.state,
+	              onChange: props.findState
+	            },
+	            _react2.default.createElement(
+	              'option',
+	              { disabled: true, selected: true },
+	              'Add your desired state'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'AL' },
+	              'AL'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'AK' },
+	              'AK'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'AZ' },
+	              'AZ'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'AR' },
+	              'AR'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'CA' },
+	              'CA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'CO' },
+	              'CO'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'CT' },
+	              'CT'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'DE' },
+	              'DE'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'FL' },
+	              'FL'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'GA' },
+	              'GA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'HI' },
+	              'HI'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'ID' },
+	              'ID'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'IL' },
+	              'IL'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'IN' },
+	              'IN'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'IA' },
+	              'IA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'KS' },
+	              'KS'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'KY' },
+	              'KY'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'LA' },
+	              'LA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'ME' },
+	              'ME'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MD' },
+	              'MD'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MA' },
+	              'MA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MI' },
+	              'MI'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MN' },
+	              'MN'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MS' },
+	              'MS'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MO' },
+	              'MO'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MT' },
+	              'MT'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NE' },
+	              'NE'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NV' },
+	              'NV'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NH' },
+	              'NH'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NJ' },
+	              'NJ'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NM' },
+	              'NM'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NY' },
+	              'NY'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NC' },
+	              'NC'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'ND' },
+	              'ND'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'OH' },
+	              'OH'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'OK' },
+	              'OK'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'OR' },
+	              'OR'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'PA' },
+	              'PA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'RI' },
+	              'RI'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'SC' },
+	              'SC'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'SD' },
+	              'SD'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'TN' },
+	              'TN'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'TX' },
+	              'TX'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'UT' },
+	              'UT'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'VT' },
+	              'VT'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'VA' },
+	              'VA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'WA' },
+	              'WA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'WV' },
+	              'WV'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'WI' },
+	              'WI'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'WY' },
+	              'WY'
+	            )
+	          )
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -48003,7 +48257,7 @@ module.exports =
 	            _react2.default.createElement(
 	              'option',
 	              { disabled: true, selected: true },
-	              'Education'
+	              'Add your education'
 	            ),
 	            _react2.default.createElement(
 	              'option',
@@ -48064,12 +48318,12 @@ module.exports =
 	            {
 	              className: 'center-block form-control fit',
 	              value: props.gender,
-	              onChange: props.addGender
+	              onChange: props.findGender
 	            },
 	            _react2.default.createElement(
 	              'option',
 	              { disabled: true, selected: true },
-	              'Gender'
+	              'Add your gender'
 	            ),
 	            _react2.default.createElement(
 	              'option',
@@ -48101,7 +48355,7 @@ module.exports =
 	          'div',
 	          { className: 'col-sm-11' },
 	          _react2.default.createElement('input', {
-	            type: 'text',
+	            type: 'number',
 	            value: props.experience,
 	            className: 'form-control',
 	            onChange: props.findExperience,
@@ -50023,7 +50277,13 @@ module.exports =
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-11' },
-	          _react2.default.createElement('input', { type: 'text', value: props.city, className: 'form-control', onChange: props.addCity, placeholder: 'Add your city' })
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            value: props.city,
+	            className: 'form-control',
+	            onChange: props.addCity,
+	            placeholder: 'Add your city'
+	          })
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -50037,7 +50297,269 @@ module.exports =
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-11' },
-	          _react2.default.createElement('input', { type: 'text', value: props.state, className: 'form-control', onChange: props.addState, placeholder: 'Add your state' })
+	          _react2.default.createElement(
+	            'select',
+	            {
+	              className: 'center-block form-control fit',
+	              value: props.state,
+	              onChange: props.addState
+	            },
+	            _react2.default.createElement(
+	              'option',
+	              { disabled: true, selected: true },
+	              'Add your desired state'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'AL' },
+	              'AL'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'AK' },
+	              'AK'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'AZ' },
+	              'AZ'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'AR' },
+	              'AR'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'CA' },
+	              'CA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'CO' },
+	              'CO'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'CT' },
+	              'CT'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'DE' },
+	              'DE'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'FL' },
+	              'FL'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'GA' },
+	              'GA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'HI' },
+	              'HI'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'ID' },
+	              'ID'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'IL' },
+	              'IL'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'IN' },
+	              'IN'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'IA' },
+	              'IA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'KS' },
+	              'KS'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'KY' },
+	              'KY'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'LA' },
+	              'LA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'ME' },
+	              'ME'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MD' },
+	              'MD'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MA' },
+	              'MA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MI' },
+	              'MI'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MN' },
+	              'MN'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MS' },
+	              'MS'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MO' },
+	              'MO'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MT' },
+	              'MT'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NE' },
+	              'NE'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NV' },
+	              'NV'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NH' },
+	              'NH'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NJ' },
+	              'NJ'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NM' },
+	              'NM'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NY' },
+	              'NY'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'NC' },
+	              'NC'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'ND' },
+	              'ND'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'OH' },
+	              'OH'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'OK' },
+	              'OK'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'OR' },
+	              'OR'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'PA' },
+	              'PA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'RI' },
+	              'RI'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'SC' },
+	              'SC'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'SD' },
+	              'SD'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'TN' },
+	              'TN'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'TX' },
+	              'TX'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'UT' },
+	              'UT'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'VT' },
+	              'VT'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'VA' },
+	              'VA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'WA' },
+	              'WA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'WV' },
+	              'WV'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'WI' },
+	              'WI'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'WY' },
+	              'WY'
+	            )
+	          )
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -50051,7 +50573,59 @@ module.exports =
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-11' },
-	          _react2.default.createElement('input', { type: 'text', value: props.education, className: 'form-control', onChange: props.addEducation, placeholder: 'Add your education level' })
+	          _react2.default.createElement(
+	            'select',
+	            {
+	              className: 'center-block form-control fit',
+	              value: props.education,
+	              onChange: props.addEducation
+	            },
+	            _react2.default.createElement(
+	              'option',
+	              { disabled: true, selected: true },
+	              'Add your education'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'High School' },
+	              'High School'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'Some College' },
+	              'Some College'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'AA' },
+	              'AA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'BA' },
+	              'BA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'BS' },
+	              'BS'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MA' },
+	              'MA'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'MS' },
+	              'MS'
+	            ),
+	            _react2.default.createElement(
+	              'option',
+	              { value: 'PhD' },
+	              'PhD'
+	            )
+	          )
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -50065,7 +50639,13 @@ module.exports =
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-11' },
-	          _react2.default.createElement('input', { type: 'text', value: props.experience, className: 'form-control', onChange: props.addExperience, placeholder: 'Years of experience' })
+	          _react2.default.createElement('input', {
+	            type: 'number',
+	            value: props.experience,
+	            className: 'form-control',
+	            onChange: props.addExperience,
+	            placeholder: 'Years of experience'
+	          })
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -50079,7 +50659,13 @@ module.exports =
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-11' },
-	          _react2.default.createElement('input', { type: 'text', value: props.position, className: 'form-control', onChange: props.addPosition, placeholder: 'Position title' })
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            value: props.position,
+	            className: 'form-control',
+	            onChange: props.addPosition,
+	            placeholder: 'Position title'
+	          })
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -50093,7 +50679,13 @@ module.exports =
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-11' },
-	          _react2.default.createElement('input', { type: 'text', value: props.salary, className: 'form-control', onChange: props.addSalary, placeholder: 'Salary' })
+	          _react2.default.createElement('input', {
+	            type: 'number',
+	            value: props.salary,
+	            className: 'form-control',
+	            onChange: props.addSalary,
+	            placeholder: 'Salary'
+	          })
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -50107,7 +50699,13 @@ module.exports =
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-11' },
-	          _react2.default.createElement('input', { type: 'text', value: props.stack, className: 'form-control', onChange: props.addStack, placeholder: 'Add any stack skills separated by commas' })
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            value: props.stack,
+	            className: 'form-control',
+	            onChange: props.addStack,
+	            placeholder: 'Add any stack skills separated by commas'
+	          })
 	        )
 	      ),
 	      _react2.default.createElement(

@@ -43,7 +43,7 @@ var getQuery = function(query, callback){
       clear[k] = query[k];
     }
   }
-  console.log(clear);
+  console.log('getQuery - ', clear);
   callback(clear);
 }
 
@@ -51,7 +51,7 @@ var getQuery = function(query, callback){
 // to get a list of salaries back.
 var getSalary = function(query, callback){
   getQuery(query, function(results){
-    SD.find(results, {salary: 1, _id : 0}).exec(function(err, results){
+    SD.find(results).exec(function(err, results){
       if(err) return handleError(err);
       callback(results);
     })
@@ -62,7 +62,7 @@ var getSalary = function(query, callback){
 // from the results of getSalary
 var calculateSalary = function(query, callback){
   getSalary(query, function(results){
-    console.log(query, results);
+    console.log('calculateSalary - ', results);
     var salaries = [];
     var calcSalary = {};
     if(results.length > 0){
@@ -80,7 +80,7 @@ var calculateSalary = function(query, callback){
       calcSalary.highest = 0;
       calcSalary.average = 0;
     }
-
+    calcSalary.allData = results;
     callback(calcSalary);
   });
 }

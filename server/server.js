@@ -59,6 +59,7 @@ app.all('*', function(req, res, next) { 
 //Search for any field
 app.post('/search', function(req, res, next) {
   SD.querySalary(req.body, function(results) {
+    // SD.query
     res.json(results);
   });
 });
