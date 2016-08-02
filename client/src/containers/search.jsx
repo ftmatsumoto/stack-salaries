@@ -42,7 +42,10 @@ class Search extends React.Component{
   }
 
   findStack(e) {
-    var newStack = this.props.searchValue + e.target.value;
+    var newStack = e.target.value;
+    if (this.props.searchValue) {
+      newStack = e.target.value;
+    }
     this.props.setSearchValue(newStack);
     this.setState({
       stack: e.target.value.toLowerCase().split(', ')
@@ -118,7 +121,7 @@ Search.contextTypes = {
 
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({setSearch: setSearch, setCityState: setCityState }, dispatch);
+  return bindActionCreators({setSearch: setSearch, setCityState: setCityState, setSearchValue: setSearchValue }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
