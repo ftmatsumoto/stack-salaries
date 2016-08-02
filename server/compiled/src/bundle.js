@@ -49376,49 +49376,110 @@ module.exports =
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'row' },
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'avatar' },
-	                  _react2.default.createElement(_reactUseravatar2.default, { username: this.props.userInfo.name })
+	                  { className: 'col-md-8' },
+	                  _react2.default.createElement(
+	                    'p',
+	                    { className: 'lead' },
+	                    'Name: ',
+	                    this.props.userInfo.name
+	                  ),
+	                  _react2.default.createElement(
+	                    'p',
+	                    { className: 'lead' },
+	                    'Email: ',
+	                    this.props.userInfo.email
+	                  ),
+	                  _react2.default.createElement(
+	                    'p',
+	                    { className: 'lead' },
+	                    'Gender: ',
+	                    this.props.userInfo.gender
+	                  )
 	                ),
 	                _react2.default.createElement(
-	                  'p',
-	                  { className: 'lead' },
-	                  'Name: ',
-	                  this.props.userInfo.name
-	                ),
-	                _react2.default.createElement(
-	                  'p',
-	                  { className: 'lead' },
-	                  'Email: ',
-	                  this.props.userInfo.email
-	                ),
-	                _react2.default.createElement(
-	                  'p',
-	                  { className: 'lead' },
-	                  'Gender: ',
-	                  this.props.userInfo.gender
+	                  'div',
+	                  { className: 'col-md-4' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'avatar center-block' },
+	                    _react2.default.createElement(_reactUseravatar2.default, { username: this.props.userInfo.name })
+	                  )
 	                )
-	              )
+	              ),
+	              this.state.userData.length ? _react2.default.createElement(
+	                'div',
+	                { className: 'salaries' },
+	                _react2.default.createElement(
+	                  'h4',
+	                  null,
+	                  'Your Salaries'
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'row dashboard-row center-block' },
+	                  _react2.default.createElement(
+	                    'table',
+	                    { className: 'table-striped salaryTable' },
+	                    _react2.default.createElement(
+	                      'thead',
+	                      null,
+	                      _react2.default.createElement(
+	                        'tr',
+	                        null,
+	                        _react2.default.createElement(
+	                          'th',
+	                          { width: '60%' },
+	                          'Stack'
+	                        ),
+	                        _react2.default.createElement(
+	                          'th',
+	                          null,
+	                          'Experience'
+	                        ),
+	                        _react2.default.createElement(
+	                          'th',
+	                          null,
+	                          'Salary'
+	                        )
+	                      )
+	                    ),
+	                    _react2.default.createElement(
+	                      'tbody',
+	                      null,
+	                      this.state.userData.map(function (salaryEntry) {
+	                        var years = salaryEntry.experience === '1' ? 'year' : 'years';
+	                        return _react2.default.createElement(
+	                          'tr',
+	                          null,
+	                          _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            salaryEntry.stack
+	                          ),
+	                          _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            salaryEntry.experience,
+	                            ' ',
+	                            years
+	                          ),
+	                          _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            '$',
+	                            salaryEntry.salary
+	                          )
+	                        );
+	                      })
+	                    )
+	                  )
+	                )
+	              ) : _react2.default.createElement('div', null)
 	            ) : _react2.default.createElement('div', null)
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row dashboard-row center-block' },
-	          console.log(this.state.userData),
-	          this.state.userData.map(function (salaryEntry) {
-	            return _react2.default.createElement(
-	              'p',
-	              null,
-	              salaryEntry.stack,
-	              ' - ',
-	              salaryEntry.experience,
-	              ' - ',
-	              salaryEntry.salary
-	            );
-	          })
 	        ),
 	        _react2.default.createElement(
 	          'div',

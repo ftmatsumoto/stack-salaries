@@ -177,28 +177,49 @@ class Dashboard extends React.Component {
         <div className="row dashboard-row center-block panel-body">
           <h1>Welcome <span className="color">{this.props.userInfo.name}</span> to the Dashboard</h1>
 
-         <div>
-              <div className = 'avatar'>
-                <UserAvatar username={this.props.userInfo.name} />
-              </div>
+          <div className="row">
+            <div className="col-md-8">
               <p className="lead">Name: {this.props.userInfo.name}</p>
               <p className="lead">Email: {this.props.userInfo.email}</p>
               <p className="lead">Gender: {this.props.userInfo.gender}</p>
+            </div>
+            <div className="col-md-4">
+              <div className = 'avatar center-block'>
+                <UserAvatar username={this.props.userInfo.name} />
+              </div>
+            </div>
           </div>
+          {this.state.userData.length ? (
+            <div className="salaries">
+              <h4>Your Salaries</h4>
+
+              <div className="row dashboard-row center-block">
+                <table className="table-striped salaryTable">
+                  <thead><tr><th width="60%">Stack</th><th>Experience</th><th>Salary</th></tr></thead>
+                  <tbody>
+                    {this.state.userData.map((salaryEntry) => {
+                      var years = salaryEntry.experience === '1' ? 'year' : 'years';
+                      return (
+                        <tr>
+                          <td>{salaryEntry.stack}</td>
+                          <td>{salaryEntry.experience} {years}</td>
+                          <td>${salaryEntry.salary}</td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )}
+
         </div>
             ) : (
               <div></div>
         )}
         </div>
-      </div>
-
-      <div className="row dashboard-row center-block">
-        { console.log(this.state.userData) }
-        {this.state.userData.map((salaryEntry) => {
-          return (
-            <p>{salaryEntry.stack} - {salaryEntry.experience} - {salaryEntry.salary}</p>
-          )
-        })}
       </div>
 
       <div className="row dashboard-row center-block">
